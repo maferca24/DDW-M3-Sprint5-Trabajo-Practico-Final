@@ -1,7 +1,7 @@
 //dashboard deberá mostrar un resumen de los países hispanohablantes, incluyendo su nombre, capital, población y bandera. Además, se pueden incluir gráficos o estadísticas relevantes sobre los países.
 //Mostrar por registro como mínimos el nombre o nombre oficial(o fallbacka name.official si no existe en español), 
 //capital, borders, area, population, timezones, creador.
-//avanzado:gini, suma de population, suma de area, promedio de gini.
+//AVANZADO:gini, suma de population, suma de area, promedio de gini.
 // views/dashboard.ejs
 //pagina en construccion, mostrar un mensaje de bienvenida y un resumen de los países hispanohablantes, incluyendo su nombre, capital, población y bandera. Además, se pueden incluir gráficos o estadísticas relevantes sobre los países.
 <h1>Dashboard de Países Hispanohablantes</h1>
@@ -20,9 +20,16 @@
                 <p>Zona Horaria: <%= country.timezones ? country.timezones.join(', ') : 'N/A' %></p>
                 <p>Creador: <%= country.createdBy || 'N/A' %></p>
                 <img src="<%= country.flags.png %>" alt="Bandera de <%= country.name.common %>" width="100">
+                //Botón editar y eliminar
+                <button onclick="location.href='/dashboard/editar/<%= country.cca3 %>'">Editar</button>
+                <button onclick="location.href='/dashboard/eliminar/<%= country.cca3 %>'
             </li>
         <% }) %>
     </ul>
+    //boton nuevo pais
+    <button onclick="location.href='/dashboard/nuevo'">Agregar Nuevo País</button>  
+    //boton para volver a inicio
+    <button onclick="location.href='/'">Volver a Inicio</button>
 </div>
 
 
