@@ -1,3 +1,4 @@
+// models/Paises.js
 import mongoose from 'mongoose';
 
 const paisSchema = new mongoose.Schema({
@@ -53,7 +54,7 @@ const paisSchema = new mongoose.Schema({
         immutable: true // Evita que se cambie accidentalmente
     }
 }, { 
-    timestamps: true, // Crea automáticamente 'createdAt' y 'updatedAt'
+    timestamps: true, // Crea automáticamente 'createdAt' y 'updatedAt' para saber cuándo se creó y actualizó cada país
     versionKey: false // Quita el campo __v que pone Mongoose por defecto
 });
 
