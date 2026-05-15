@@ -36,7 +36,6 @@ app.get('/', (req, res) => {
 app.use('/api', paisesRoutes);// Configurar las rutas de la API para paises, que se encuentran en el archivo paisesRoutes.mjs
 
 // Rutas del Dashboard (Frontend/Vistas)
-//Guia para configurar rutas- API y Frontend
 app.use("/dashboard", paisesfront);// Configurar la ruta para el dashboard, que renderiza las vistas del frontend para paises   
 
 // Manejo de errores 404 (Página no encontrada)
@@ -48,3 +47,10 @@ app.use((req, res) => {
 app.listen(PORT, '0.0.0.0', () => {//
     console.log(`Servidor levantado en el puerto ${PORT}`);
 });
+
+//Tener en cuenta estas correcciones:
+// Dentro de src/app.mjs
+// const __dirname = path.resolve(); // Raíz del proyecto
+
+// app.set("views", path.join(__dirname, "src", "views"));
+// app.use(express.static(path.join(__dirname, "public")));
