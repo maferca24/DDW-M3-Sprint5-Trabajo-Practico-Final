@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 
 const paisSchema = new mongoose.Schema({
     // Nombre oficial: 3-90 caracteres, obligatorio, sin espacios al inicio o final
-    nombreOficial: { 
-        type: String, 
+    nombreOficial: {
+        type: String,
         required: [true, 'El nombre oficial es obligatorio'],
         trim: true,
         minlength: [3, 'Mínimo 3 caracteres'],
@@ -15,7 +15,7 @@ const paisSchema = new mongoose.Schema({
         type: [String],
         default: ['No tiene']
     },
-    // Fronteras: Array de códigos de 3 letras (Ej: ARG, BRA, CHL)
+    // Fronteras: Array de códigos de 3 letras (Ej: ARG, BRA, CHL)-Equivale a los países limitrofes 
     borders: {
         type: [String],
         default: []
@@ -53,7 +53,7 @@ const paisSchema = new mongoose.Schema({
         default: "Fernanda",// Para que identifique los paises creados por mi, pero se puede cambiar al crear un nuevo país
         immutable: true // Evita que se cambie accidentalmente
     }
-}, { 
+}, {
     timestamps: true, // Crea automáticamente 'createdAt' y 'updatedAt' para saber cuándo se creó y actualizó cada país
     versionKey: false // Quita el campo __v que pone Mongoose por defecto
 });
