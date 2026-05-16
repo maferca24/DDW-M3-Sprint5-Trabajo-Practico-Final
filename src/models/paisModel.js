@@ -6,7 +6,7 @@ const paisSchema = new mongoose.Schema({
     nombreOficial: {
         type: String,
         required: [true, 'El nombre oficial es obligatorio'],
-        trim: true,
+        trim: true,// Elimina espacios al inicio y al final
         minlength: [3, 'Mínimo 3 caracteres'],
         maxlength: [90, 'Máximo 90 caracteres']
     },
@@ -15,7 +15,7 @@ const paisSchema = new mongoose.Schema({
         type: [String],
         default: ['No tiene']
     },
-    // Fronteras: Array de códigos de 3 letras (Ej: ARG, BRA, CHL)-Equivale a los países limitrofes 
+    // Fronteras/Limites: Array de códigos de 3 letras (Ej: ARG, BRA, CHL)-Equivale a los países limitrofes 
     borders: {
         type: [String],
         default: []
@@ -32,7 +32,7 @@ const paisSchema = new mongoose.Schema({
         min: [0, 'La población no puede ser negativa'],
         default: 0
     },
-    // Opcion Avanzada -Gini: Lo definimos como opcional (null por defecto)- Gini: Coeficiente de desigualdad, número entre 0 y 100
+    // Opcion Avanzada -Gini: (null por defecto)- Gini: Coeficiente de desigualdad, número entre 0 y 100
     gini: {
         type: Number,
         default: null
