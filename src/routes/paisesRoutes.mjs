@@ -3,7 +3,16 @@ import express from "express";
 import { getDashboardController } from "../controllers/paisesControllers.mjs"; 
 
 
-
+// Ruta para probar cargar la base de datos
+router.get('/sincronizar', async (req, res) => {
+    try {
+        const datosLimpios = await obtenerYProcesarPaises(); // Llama al servicio que obtiene y procesa los datos de la API externa
+        await paisRepository.guardarMuchos(datosLimpios);    // Llama al repositorio que guarda los datos en la base de datos 
+        res.send("¡Base de datos de países actualizada con éxito!");
+    } catch (error) {
+        res.status(500).send("Error en la sincronización: " + error.message);
+    }
+});
 
 
 
