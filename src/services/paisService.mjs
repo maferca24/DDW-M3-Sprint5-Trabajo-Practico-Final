@@ -8,7 +8,7 @@ export const obtenerYProcesarPaises = async () => {
         const url = 'https://restcountries.com/v3.1/region/americas';
         const { data } = await axios.get(url);
 
-        // Filtramos y Mapeamos en un solo paso
+        // Filtramos y Mapeamos en un solo paso para obtener solo los países que hablen español y con la estructura de nuestro modelo de país
         const paisesFiltrados = data
             .filter(pais => pais.languages && pais.languages.spa) // Solo hispanohablantes
             .map(pais => {
