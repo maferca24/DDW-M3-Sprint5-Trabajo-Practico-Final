@@ -1,6 +1,6 @@
 //defino rutas de la API para paises
 import express from 'express';// Importar el framework Express para crear el servidor web
-import { obtenerYProcesarPaises } from '../services/paisesService.mjs';// Importar el servicio que obtiene y procesa los datos de la API externa
+import { obtenerYProcesarPaises } from '../services/paisService.mjs';// Importar el servicio que obtiene y procesa los datos de la API externa
 import paisRepository from '../repositories/paisRepository.mjs';// Importar el repositorio que guarda los datos en la base de datos
 const router = express.Router();
 

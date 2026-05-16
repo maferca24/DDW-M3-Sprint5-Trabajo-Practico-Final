@@ -52,12 +52,20 @@ const paisSchema = new mongoose.Schema({
         type: String,
         default: "Fernanda",// Para que identifique los paises creados por mi, pero se puede cambiar al crear un nuevo país
         immutable: true // Evita que se cambie accidentalmente
-    }
-}, {
+    },
+    // TipoDocumento: Para identificar que el documento es un país, con un valor por defecto. Porque estamos usando una colección compartida (Grupo-04),
+    //  entonces esto nos ayuda a filtrar solo los documentos que son países.
+    tipoDocumento: { type: String, default: "pais" ,immutable: true },// Para que nunca cambie}, 
     timestamps: true, // Crea automáticamente 'createdAt' y 'updatedAt' para saber cuándo se creó y actualizó cada país
     versionKey: false // Quita el campo __v que pone Mongoose por defecto
 });
 
 // Exportamos el modelo
-const Pais = mongoose.model('Pais', paisSchema);
+// Cambiamos esto porque no tenemos permitidos agregar nueva colección, entonces le decimos a Mongoose que use la colección "Grupo-04" 
+// que ya existe en la base de datos.:  
+// const Pais = mongoose.model('Pais', paisSchema);
+
+// Por esto (agregando el tercer parámetro con el nombre exacto de la colección):
+const Pais = mongoose.model('Pais', paisSchema, 'Grupo-04'); 
+
 export default Pais;

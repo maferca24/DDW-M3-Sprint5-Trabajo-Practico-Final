@@ -12,11 +12,10 @@ class PaisRepository {
                 // Buscamos por nombre oficial y creador
                 // Si existe, actualiza; si no, lo crea (upsert)
                 return Pais.findOneAndUpdate(
-                    { nombreOficial: pais.nombreOficial, creador: "Fernanda" },
-                    pais,
-                    { upsert: true, new: true, runValidators: true }// upsert: true crea si no existe, 
-                    // new: true devuelve el documento actualizado, runValidators: true para validar con el esquema de Mongoose 
-                    // (por ejemplo, para asegurarnos de que el nombre oficial tenga entre 3 y 90 caracteres)                     
+                    { nombreOficial: pais.nombreOficial, creador: "Fernanda", tipoDocumento: "pais" },
+                    { ...pais, tipoDocumento: "pais" }, // Nos aseguramos de que viaje el campo tipoDocumento para que se guarde correctamente, 
+                    // ya que es importante para filtrar los países en el futuro
+                    { upsert: true, returnDocument: 'after', runValidators: true }
                 );
             });
 
@@ -29,7 +28,10 @@ class PaisRepository {
 
     // Busca todos los países creados por mi. "Fernanda" para mostrarlos en el Dashboard
     async obtenerTodos() {
-        return await Pais.find({ creador: "Fernanda" });
+        // return await Pais.find({ creador: "Fernanda" });
+        // Agregamos el filtro por creador y tipoDocumento para asegurarnos de que solo traemos documentos que son países, 
+        // ya que estamos usando una colección compartida (Grupo-04)
+        return await Pais.find({ creador: "Fernanda", tipoDocumento: "pais" });
     }
 }
 

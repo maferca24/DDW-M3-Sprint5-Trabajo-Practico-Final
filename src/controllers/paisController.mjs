@@ -2,13 +2,12 @@
 //a la capa de servicios para realizar las operaciones necesarias
 // El controlador es el encargado de recibir las solicitudes del cliente, procesarlas (si es necesario) y llamar a los servicios 
 // para obtener los datos o realizar las operaciones necesarias. Luego, devuelve la respuesta al cliente, ya sea renderizando una vista o enviando un JSON.
-import {
-}
+import { obtenerTodos }
     from "../services/paisService.mjs";
 
 //importa vistas para renderizar respuestas
-import { renderizarListaPaises, renderizarPais }
-    from "../views/responseViews.mjs";  
+// import { renderizarListaPaises, renderizarPais }
+//     from "../views/responseViews.mjs";  
     
  
 // Nuevo controlador para renderizar el dashboard

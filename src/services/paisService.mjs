@@ -24,11 +24,22 @@ export const obtenerYProcesarPaises = async () => {
                     population: pais.population || 0,
                     timezones: pais.timezones || [],
                     bandera: pais.flags.svg, // Usamos la imagen vectorial
-                    creador: "Fernanda" // Valor por defecto para identificar los países creados por mí
+                    creador: "Fernanda", // Valor por defecto para identificar los países creados por mí
+                    tipoDocumento: "pais" // Tu discriminador seguro
                 };
             });
 
-        return paisesFiltrados;
+        //return paisesFiltrados;
+        // ==========================================
+        // SUB-RUTA DE PRUEBA: Tomamos SOLO el primer país
+        // ==========================================
+        const unSoloPais = paisesFiltrados.slice(0, 1); 
+        console.log("-> País de prueba preparado:", unSoloPais[0].nombreOficial);
+        
+        return unSoloPais; // Devolvemos un array con un único país
+
+
+
     } catch (error) {
         console.error("Error al procesar datos de la API:", error);
         throw new Error("No se pudo obtener la información de la API externa");
