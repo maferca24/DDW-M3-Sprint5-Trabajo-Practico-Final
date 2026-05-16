@@ -2,7 +2,7 @@ import express from 'express';// Importar el framework Express para crear el ser
 import path from 'path';// Importar el módulo 'path' para manejar rutas de archivos y directorios
 import expressLayouts from 'express-ejs-layouts';// Importar el middleware 'express-ejs-layouts' para usar layouts con EJS
 import { connectDB } from './config/dbConfig.mjs';// Importar la función 'connectDB' para conectar a la base de datos MongoDB
-//import paisesRoutes from './routes/paisesRoutes.mjs';// Importar las rutas de la API para paises
+import paisesRoutes from './routes/paisesRoutes.mjs';// Importar las rutas de la API para paises
 import paisesfront from './routes/paisesFront.mjs';// Importar las rutas del frontend para paises
 
 const app = express();// Crear instancia de Express
@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 app.use('/api', paisesRoutes);// Configurar las rutas de la API para paises, que se encuentran en el archivo paisesRoutes.mjs
 
 // Rutas del Dashboard (Frontend/Vistas)
-app.use("/dashboard", paisesfront);// Configurar la ruta para el dashboard, que renderiza las vistas del frontend para paises   
+//app.use("/dashboard", paisesfront);// Configurar la ruta para el dashboard, que renderiza las vistas del frontend para paises   
 
 // Manejo de errores 404 (Página no encontrada)
 app.use((req, res) => {

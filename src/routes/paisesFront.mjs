@@ -1,7 +1,7 @@
 import express from 'express';// Importar el framework Express para crear el servidor web
 const router = express.Router();
 //Ruta para mostrar el dashboard la lista de paises desde el controlador nuevo
-router.get("/", getDashboardController); 
+//router.get("/", getDashboardController); 
 //Ruta para mostrar el formulario de creación de un nuevo pais
 router.get("/nuevo", (req, res) => {
     res.render("addPais", { title: 'Agregar País' });// Renderiza la vista addPais.ejs para mostrar el formulario de creación de un nuevo país
