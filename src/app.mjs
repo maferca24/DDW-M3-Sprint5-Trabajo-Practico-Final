@@ -1,36 +1,62 @@
-import express from 'express';// Importar el framework Express para crear el servidor web
-import path from 'path';// Importar el módulo 'path' para manejar rutas de archivos y directorios
-import expressLayouts from 'express-ejs-layouts';// Importar el middleware 'express-ejs-layouts' para usar layouts con EJS
-import { connectDB } from './config/dbConfig.mjs';// Importar la función 'connectDB' para conectar a la base de datos MongoDB
-import paisesRoutes from './routes/paisesRoutes.mjs';// Importar las rutas de la API para paises
-import paisesfront from './routes/paisesFront.mjs';// Importar las rutas del frontend para paises
+import express from 'express'; // Importar el framework Express para crear el servidor web
+import path from 'path'; // Importar el módulo 'path' para manejar rutas de archivos y directorios
+import expressLayouts from 'express-ejs-layouts'; // Importar el middleware 'express-ejs-layouts' para usar layouts con EJS
+import { connectDB } from './config/dbConfig.mjs'; // Importar la función 'connectDB' para conectar a la base de datos MongoDB
+import paisesRoutes from './routes/paisesRoutes.mjs'; // Importar las rutas de la API para paises
+import paisesfront from './routes/paisesFront.mjs'; // Importar las rutas del frontend para paises
 
-const app = express();// Crear instancia de Express
-const PORT = process.env.PORT || 3000;// Definir el puerto para el servidor, usando una variable de entorno o el puerto 3000 por defecto
+const app = express(); // Crear instancia de Express
+const PORT = process.env.PORT || 3000; // Definir el puerto para el servidor
 
-//Configuración del motor de plantillas y vistas
-app.set("view engine", "ejs");// Configurar ejs como motor de plantillas
-app.set("views", path.resolve("./views")); //Especificar la carpeta donde se encuentran las vistas (plantillas ejs)
+// Identificar la raíz actual de ejecución (src) para configurar correctamente las rutas de archivos estáticos y vistas
+const __dirname = path.resolve(); 
+//console.log("-> Ruta base actual (__dirname):", __dirname); 
 
-// Configuración de Layouts,se configura express-ejs-layouts para usar un layout común en las vistas
+//Configuración de archivos estáticos (CSS, JS, imágenes, etc.) 
+app.use(express.static(path.join(__dirname, '..', 'public')));// Como __dirname es 'src', usamos '..' para salir a la raíz del proyecto y encontrar 'public'
+
+//Configuración de vistas y motor de plantillas (EJS) 
+// Como las vistas están dentro de 'src/views', y __dirname ya es 'src', las unimos directamente
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs"); // Configurar ejs como motor de plantillas
+
+// Configuración de Layouts
 app.use(expressLayouts);
-app.set('layout', 'layout'); // Busca views/layout.ejs- Indica que use layout.ejs por defecto para todas las vistas
+app.set('layout', 'layout'); // Busca views/layout.ejs por defecto
 
-// Archivos estáticos y Middlewares
-app.use(express.static(path.resolve("./public")));// Servir archivos estáticos desde la carpeta "public" (para CSS, JS, imágenes, etc.)
-app.use(express.json()); // Para procesar JSON en el cuerpo de las peticiones
-app.use(express.urlencoded({ extended: true })); // Útil si envías datos por formularios simples ????
+// Middlewares para procesar datos
+app.use(express.json()); // Para procesar JSON
+app.use(express.urlencoded({ extended: true })); // Para procesar formularios simples
 
 // Conexión a MongoDB
 connectDB();
 
-// Definimo Rutas
+// ==========================================
+// DEFINICIÓN DE RUTAS
+// ==========================================
+
 // Página de inicio (Landing Page)
 app.get('/', (req, res) => {
     res.render('index', { 
-        title: 'Inicio' //paso el titulo a la vista index.ejs para que se muestre en el navegador
+        title: 'Gestión de Países' // Título dinámico para el head
     });
 });
+
+// Rutas de la API (Backend)
+app.use('/api', paisesRoutes);
+
+// Rutas del Dashboard (Frontend/Vistas)
+app.use("/dashboard", paisesfront);
+
+// Manejo de errores 404 (Página no encontrada)
+app.use((req, res) => {
+    res.status(404).render('404', { title: 'Página no encontrada' });
+});
+
+// // Levantar el servidor
+// app.listen(PORT, '0.0.0.0', () => {
+//     console.log(`Servidor levantado con éxito en el puerto ${PORT}`);
+// });
 
 // Rutas de la API (Backend)
 app.use('/api', paisesRoutes);// Configurar las rutas de la API para paises, que se encuentran en el archivo paisesRoutes.mjs
@@ -48,9 +74,3 @@ app.listen(PORT, '0.0.0.0', () => {//
     console.log(`Servidor levantado en el puerto ${PORT}`);
 });
 
-//Tener en cuenta estas correcciones:
-// Dentro de src/app.mjs
-// const __dirname = path.resolve(); // Raíz del proyecto
-
-// app.set("views", path.join(__dirname, "src", "views"));
-// app.use(express.static(path.join(__dirname, "public")));
