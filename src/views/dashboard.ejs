@@ -10,19 +10,19 @@
     <p>Bienvenidos al dashboard de países hispanohablantes. Aquí podrás encontrar información relevante sobre los países de habla hispana, incluyendo su nombre, capital, población y bandera.</p>
     <p>A continuación, se muestra un resumen de los países hispanohablantes:</p>
     <ul>
-        <% countries.forEach(country => { %>
+        <% paises.forEach(pais => { %>
             <li>
-                <h2><%= country.name.official || country.name.common %></h2>
-                <p>Capital: <%= country.capital ? country.capital[0] : 'N/A' %></p>
-                <p>Limites: <%= country.borders ? country.borders.join(', ') : 'N/A' %></p>
-                <p>Área: <%= country.area ? country.area.toLocaleString() : 'N/A' %></p>
-                <p>Población: <%= country.population.toLocaleString() %></p>
-                <p>Zona Horaria: <%= country.timezones ? country.timezones.join(', ') : 'N/A' %></p>
-                <p>Creador: <%= country.createdBy || 'N/A' %></p>
-                <img src="<%= country.flags.png %>" alt="Bandera de <%= country.name.common %>" width="100">
+                <h2><%= pais.name.official || pais.name.common %></h2>
+                <p>Capital: <%= pais.capital ? pais.capital[0] : 'N/A' %></p>
+                <p>Limites: <%= pais.borders ? pais.borders.join(', ') : 'N/A' %></p>
+                <p>Área: <%= pais.area ? pais.area.toLocaleString() : 'N/A' %></p>
+                <p>Población: <%= pais.population.toLocaleString() %></p>
+                <p>Zona Horaria: <%= pais.timezones ? pais.timezones.join(', ') : 'N/A' %></p>
+                <p>Creador: <%= pais.createdBy || 'N/A' %></p>
+                <img src="<%= pais.flags.png %>" alt="Bandera de <%= pais.name.common %>" width="100">
                 //Botón editar y eliminar
-                <button onclick="location.href='/dashboard/editar/<%= country.cca3 %>'">Editar</button>
-                <button onclick="location.href='/dashboard/eliminar/<%= country.cca3 %>'
+                <button onclick="location.href='/dashboard/editar/<%= pais.cca3 %>'">Editar</button>
+                <button onclick="location.href='/dashboard/eliminar/<%= pais.cca3 %>'">Eliminar</button>
             </li>
         <% }) %>
     </ul>

@@ -1,4 +1,6 @@
 import axios from 'axios';// Importamos axios para hacer la petición HTTP -para consumir la API externa y obtener los datos de los países
+import paisRepository from '../repositories/paisRepository.mjs';// Importamos el repositorio 
+// de países para interactuar con la base de datos
 
 //Servicio para obtener y procesar los datos de la API externa, filtrando solo los países de América que hablen español 
 //Este servicio se encargará de consumir la API, filtrar los datos y devolver un array de objetos con la estructura de acuerdo a nuestro modelo de país.
@@ -29,14 +31,15 @@ export const obtenerYProcesarPaises = async () => {
                 };
             });
 
-        //return paisesFiltrados;
+        return paisesFiltrados;
         // ==========================================
-        // SUB-RUTA DE PRUEBA: Tomamos SOLO el primer país
+        // SUB-RUTA DE PRUEBA: Tomamos SOLO el primer país para probar la estructura y el funcionamiento del servicio sin sobrecargar la base de datos con todos los países de América
+
         // ==========================================
-        const unSoloPais = paisesFiltrados.slice(0, 1); 
+        //const unSoloPais = paisesFiltrados.slice(0, 1); 
         console.log("-> País de prueba preparado:", unSoloPais[0].nombreOficial);
         
-        return unSoloPais; // Devolvemos un array con un único país
+        //return unSoloPais; // Devolvemos un array con un único país
 
 
 
@@ -45,3 +48,11 @@ export const obtenerYProcesarPaises = async () => {
         throw new Error("No se pudo obtener la información de la API externa");
     }
 };
+
+// Servicio para tomar los datos del base y pasar a la vista del dashboard, 
+// para mostrar la lista de países en el frontend
+export async function obtenerTodosLosPaises() {
+    return await paisRepository.obtenerTodos();
+}
+
+
