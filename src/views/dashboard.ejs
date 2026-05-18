@@ -19,7 +19,7 @@
                 <p>Población: <%= pais.population.toLocaleString() %></p>
                 <p>Zona Horaria: <%= pais.timezones ? pais.timezones.join(', ') : 'N/A' %></p>
                 <p>Creador: <%= pais.creador || 'N/A' %></p>
-                <img src="<%= pais.flags.png %>" alt="Bandera de <%= pais.name.common %>" width="100">
+                <img src="<%= pais.bandera.svg %>" alt="Bandera de <%= pais.nombreOficial%>" width="100">
                 //Botón editar y eliminar
                 <button onclick="location.href='/dashboard/editar/<%= pais.cca3 %>'">Editar</button>
                 <button class="btn-edit" onclick="editar('<%=pais._id %>')">Modificar</button>
