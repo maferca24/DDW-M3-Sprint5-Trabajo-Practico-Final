@@ -64,8 +64,51 @@
                 errors.push("El nombre del país debe tener máximo 90 caracteres.");
             }
         }
+        //capital: obligatorio, al menos una capital, cada una entre 3 y 90 caracteres
+        if (capital.length === 0) {
+            errors.push("Debes agregar al menos una capital.");
+        } else {
 
+            capital.forEach((cap, index) => {
+
+                if (!cap.trim()) {
+                    errors.push(`La capital #${index + 1} no puede estar vacía.`);
+                }
+
+                if (cap.length < 3) {
+                    errors.push(`La capital "${cap}" debe tener mínimo 3 caracteres.`);
+                }
+
+                if (cap.length > 90) {
+                    errors.push(`La capital "${cap}" debe tener máximo 60 caracteres.`);
+                }
+            });
+        }
+        // area: obligatorio, número positivo   
+        if (isNaN(area) || area <= 0) {
+            errors.push("El área debe ser un número positivo.");
+        }
+        // población: obligatorio, número entero positivo
+        if (isNaN(poblacion) || poblacion <= 0 || !Number.isInteger(poblacion)) {
+            errors.push("La población debe ser un número entero positivo.");
+        }   
         
+        // Si hay errores, mostrar alert con todos los mensajes
+        if (errors.length > 0) {
+            alert("Por favor corrige los siguientes errores:\n\n" + errors.join("\n"));
+            return; // Detener el envío del formulario
+        }   
+
+        //Crear objeto con los datos del formulario
+        const data = {
+            nombre,
+            capital,
+            limites,
+            area,
+            poblacion,
+            zonasHorarias,
+            creador
+        };        
 
         try {
             const response = await fetch('/api/paises', {
@@ -88,6 +131,8 @@
                 alert('País agregado exitosamente');
                 location.href = '/dashboard';
             } else {
+                const errorData = await response.json();    
+                console.error('Error:', errorData);
                 alert('Error al agregar el país');
             }
         } catch (error) {
