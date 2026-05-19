@@ -1,0 +1,98 @@
+<h1>Agregar País</h1>
+<div>
+    <form id="addPaisForm">
+        <label for="nombreOficial">Nombre Oficial:</label>
+        <input type="text" id="nombreOficial" name="nombreOficial" maxlength="90" minlength="3" required>
+        <br>
+        <label for="capital">Capital (separados por coma):</label>
+        <input type="text" id="capital" name="capital" required>    
+        <br>
+        <label for="limites">Límites / Fronteras (separados por comas):</label>
+        <input type="text" id="limites" name="limites">
+        <br>
+        <label for="area">Área (km²):</label>
+        <input type="number" id="area" name="area" required>    
+        <br>
+        <label for="poblacion">Población:</label>
+        <input type="number" id="poblacion" name="poblacion" required>
+        <br>
+        <label for="zonasHorarias">Zonas Horarias (separadas por comas):</label>
+        <input type="text" id="zonasHorarias" name="zonasHorarias">
+        <br>
+        <label for="creador">Creador:</label>
+        <input type="text" id="creador" name="creador" value="Fernanda">
+        <br>
+        <button type="submit">Agregar País</button>
+    </form>
+    <button onclick="location.href='/dashboard'" class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-2.5 rounded transition duration-150 border border-gray-300 mt-4">
+        Volver al Dashboard 
+    </button>
+</div>
+<script>
+    document.getElementById('addPaisForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        //Obtener y limpiar los valores del formulario
+        const nombre = document.getElementById('nombreOficial').value.trim();
+        //const capital = document.getElementById('capital').value.trim() || 'N/A';
+        const limites = document.getElementById('limites').value.split(',').map(l => l.trim()).filter(l => l);
+        const area = parseFloat(document.getElementById('area').value);
+        const poblacion = parseInt(document.getElementById('poblacion').value);
+        const zonasHorarias = document.getElementById('zonasHorarias').value.split(',').map(z => z.trim()).filter(z => z);
+        const creador = document.getElementById('creador').value.trim() || 'Fernanda';
+
+         const capital = document.getElementById('capital')
+            .value
+            .split(',')
+            .map(p => p.trim())
+            .filter(p => p !== '');
+        
+        // =========================
+        // VALIDACIONES
+        // =========================
+        const errors = [];
+
+        // nombrePais: obligatorio, entre 3 y 90 caracteres
+        if (!nombreOficial) {
+            errors.push("El nombre del país es obligatorio.");
+        } else {
+            if (nombreOficial.length < 3) {
+                errors.push("El nombre del país debe tener mínimo 3 caracteres.");
+            }
+
+            if (nombreOficial.length > 90) {
+                errors.push("El nombre del país debe tener máximo 90 caracteres.");
+            }
+        }
+
+        
+
+        try {
+            const response = await fetch('/api/paises', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nombre,
+                    capital,
+                    limites,
+                    area,
+                    poblacion,
+                    zonasHorarias,
+                    creador
+                })
+            });
+
+            if (response.ok) {
+                alert('País agregado exitosamente');
+                location.href = '/dashboard';
+            } else {
+                alert('Error al agregar el país');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error al agregar el país');
+        }
+    });
+</script>
