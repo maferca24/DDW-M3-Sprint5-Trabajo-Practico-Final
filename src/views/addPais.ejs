@@ -2,66 +2,80 @@
     
     <div class="mb-6">
         <a href="/dashboard" class="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition duration-150">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
             Volver al Dashboard
         </a>
     </div>
 
     <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
         
-        <div>
-            <h1>Agregar Nuevo País</h1>
-            <p>Registra un nuevo país de forma manual.</p>
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-5 text-white">
+            <h1 class="text-xl font-bold">Agregar Nuevo País</h1>
+            <p class="text-blue-100 text-xs mt-1">Registra un nuevo país de forma manual.</p>
         </div>
 
-        <form id="addPaisForm">
+        <form id="addPaisForm" class="p-6 space-y-5">
             
             <div>
-                <label for="nombreOficial">Nombre Oficial:</label>
-                <input type="text" id="nombreOficial" name="nombreOficial" maxlength="90" minlength="3" required placeholder="Ej. República Argentina">
+                <label for="nombreOficial" class="block text-sm font-medium text-gray-700 mb-1">Nombre Oficial:</label>
+                <input type="text" id="nombreOficial" name="nombreOficial" maxlength="90" minlength="3" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                       placeholder="Ej. República de Costa Rica">
             </div>
 
             <div>
-                <label for="capital">Capital (separados por coma):</label>
-                <input type="text" id="capital" name="capital" required placeholder="Ciudad Automona de Buenos Aires">
+                <label for="capital" class="block text-sm font-medium text-gray-700 mb-1">Capital (separados por coma):</label>
+                <input type="text" id="capital" name="capital" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                       placeholder="Ej. San José">
             </div>
 
             <div>
-                <label for="limites" >Límites / Fronteras (3 letras mayúsculas, separados por comas):</label>
-                <input type="text" id="limites" name="limites"                       
-                       placeholder="Ej. CHI, URY, BRA, PRY">
+                <label for="limites" class="block text-sm font-medium text-gray-700 mb-1">Límites / Fronteras (3 letras mayúsculas, separados por comas):</label>
+                <input type="text" id="limites" name="limites"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                       placeholder="Ej. PAN, NIC">
             </div>
 
-            <div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label for="area">Área (km²):</label>
-                    <input type="number" id="area" name="area" required min="1"                           
+                    <label for="area" class="block text-sm font-medium text-gray-700 mb-1">Área (km²):</label>
+                    <input type="number" id="area" name="area" required min="1"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                            placeholder="51100">
                 </div>
                 <div>
-                    <label for="poblacion">Población:</label>
-                    <input type="number" id="poblacion" name="poblacion" required min="1"                           
+                    <label for="poblacion" class="block text-sm font-medium text-gray-700 mb-1">Población:</label>
+                    <input type="number" id="poblacion" name="poblacion" required min="1"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                            placeholder="5150000">
                 </div>
             </div>
 
             <div>
-                <label for="zonasHorarias">Zonas Horarias (separadas por comas):</label>
-                <input type="text" id="zonasHorarias" name="zonasHorarias">
+                <label for="zonasHorarias" class="block text-sm font-medium text-gray-700 mb-1">Zonas Horarias (separadas por comas):</label>
+                <input type="text" id="zonasHorarias" name="zonasHorarias"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                       placeholder="Ej. UTC-06:00">
             </div>
 
             <div>
-                <label for="bandera">URL de la Bandera (Link SVG o PNG):</label>
-                <input type="url" id="bandera" name="bandera" required         
-                       placeholder="https://flagpedia.net/argentina">
+                <label for="bandera" class="block text-sm font-medium text-gray-700 mb-1">URL de la Bandera (Link SVG o PNG):</label>
+                <input type="url" id="bandera" name="bandera" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                       placeholder="https://flagcdn.com/cr.svg">
             </div>
 
             <div>
-                <label for="creador" >Creador:</label>
-                <input type="text" id="creador" name="creador" value="Fernanda" readonly>
+                <label for="creador" class="block text-sm font-medium text-gray-400 mb-1">Creador:</label>
+                <input type="text" id="creador" name="creador" value="Fernanda" readonly
+                       class="w-full px-3 py-2 border border-gray-200 bg-gray-50 text-gray-400 rounded-xl text-sm outline-none cursor-not-allowed">
             </div>
 
-            <div>
-                <button type="submit">
+            <div class="pt-4 flex justify-end">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-6 rounded-xl text-sm shadow-sm transition duration-150">
                     Agregar País
                 </button>
             </div>
