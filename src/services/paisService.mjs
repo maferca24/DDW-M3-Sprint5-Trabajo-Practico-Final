@@ -60,7 +60,7 @@ export async function crearPais(pais) {
     if (!pais.nombreOficial || !pais.capital) {
         throw new Error("El nombre oficial y la capital son obligatorios.");
     }
-    return await paisRepository.crearPais(pais);
+    return await paisRepository.crear(pais);
 }
 
 

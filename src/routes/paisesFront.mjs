@@ -6,10 +6,11 @@ const router = express.Router();
 router.get("/", getDashboardController); 
 
 //Ruta para mostrar el formulario de creación de un nuevo pais
-// router.get("/nuevo", (req, res) => {
-//     res.render("addPais", { title: 'Agregar País' });// Renderiza la vista addPais.ejs para mostrar el formulario de creación de un nuevo país
-// });
-//ruta para mostrar el formulario de edición de un pais existente, obteniendo los datos del pais desde la API
+ router.get("/nuevo", (req, res) => {
+     res.render("addPais", { title: 'Agregar País' });// Renderiza la vista addPais.ejs para mostrar el formulario de creación de un nuevo país
+ });
+
+ //ruta para mostrar el formulario de edición de un pais existente, obteniendo los datos del pais desde la API
 // router.get("/modificar/:id", async (req, res) => {      
 //     const respuesta = await fetch(
 //     `${req.protocol}://${req.get("host")}/api/paises/${req.params.id}`//`http://localhost:3000/api/paises/${req.params.id}`,    

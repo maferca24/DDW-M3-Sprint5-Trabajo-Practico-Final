@@ -18,7 +18,8 @@ router.get('/sincronizar', async (req, res) => {
 });
 
 // Ruta para agregar un nuevo país (desde el formulario del frontend)
-router.post('/paises', validatePais, crearPaisController);
+//router.post('/paises', validatePais, crearPaisController);
+router.post('/paises', crearPaisController);
 
 export default router;
 
