@@ -31,6 +31,26 @@ export async function obtenerTodosLosPaisesController(req, res) {
         });
     }
 }
+// Controlador para crear un nuevo país
+export async function crearPaisController(req, res) {
+    try {
+        const pais = req.body;
+        const nuevoPais = await crearPais(pais);
+
+        // Respondemos con el objeto creado y un código 201 (Creado)
+        res.status(201).send({
+            mensaje: 'País creado con éxito',
+            datos: nuevoPais
+        });
+    } catch (error) {
+        res.status(500).send({
+            mensaje: 'Error al crear el país',
+            error: error.message
+        });
+    }
+}
+
+
 
 
 

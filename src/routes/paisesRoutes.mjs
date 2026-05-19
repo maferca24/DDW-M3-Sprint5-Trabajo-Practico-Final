@@ -16,6 +16,10 @@ router.get('/sincronizar', async (req, res) => {
         res.status(500).send("Error en la sincronización: " + error.message);
     }
 });
+
+// Ruta para agregar un nuevo país (desde el formulario del frontend)
+router.post('/paises', validatePais, crearPaisController);
+
 export default router;
 
 

@@ -35,6 +35,23 @@ class PaisRepository extends IRepository {
         // ya que estamos usando una colección compartida (Grupo-04)
         return await Pais.find({ creador: "Fernanda", tipoDocumento: "pais" });
     }
+    async crear(pais) {
+        try {
+            // Usamos 'pais' que es lo que recibe la función
+            const nuevoPais = new Pais(pais);
+
+            // Lo guardamos en MongoDB
+            console.log('Pais creado con exito');
+            //console.log(datosPais);
+            return await nuevoPais.save();
+
+        } catch (error) {
+            // Es buena idea imprimir el error real en consola para debuguear
+            console.error("Error en Repository:", error);
+            throw new Error('Error al guardar el pais en la base de datos');
+        }
+
+    }
 }
 
 export default new PaisRepository();

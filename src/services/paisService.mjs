@@ -55,4 +55,13 @@ export async function obtenerTodosLosPaises() {
     return await paisRepository.obtenerTodos();
 }
 
+export async function crearPais(pais) {
+    //Agregamos control para validar los datos antes de pasarlos al repositorio
+    if (!pais.nombreOficial || !pais.capital) {
+        throw new Error("El nombre oficial y la capital son obligatorios.");
+    }
+    return await paisRepository.crearPais(pais);
+}
+
+
 
