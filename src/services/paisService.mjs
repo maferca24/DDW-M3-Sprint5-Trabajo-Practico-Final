@@ -33,7 +33,8 @@ export const obtenerYProcesarPaises = async () => {
 
         return paisesFiltrados;
         // ==========================================
-        // SUB-RUTA DE PRUEBA: Tomamos SOLO el primer país para probar la estructura y el funcionamiento del servicio sin sobrecargar la base de datos con todos los países de América
+        // SUB-RUTA DE PRUEBA: Tomamos SOLO el primer país para probar la estructura 
+        // y el funcionamiento del servicio sin sobrecargar la base de datos con todos los países de América
 
         // ==========================================
         //const unSoloPais = paisesFiltrados.slice(0, 1); 

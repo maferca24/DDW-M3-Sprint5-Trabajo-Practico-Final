@@ -11,23 +11,23 @@ router.get("/", getDashboardController);
  });
 
  //ruta para mostrar el formulario de edición de un pais existente, obteniendo los datos del pais desde la API
-// router.get("/modificar/:id", async (req, res) => {      
-//     const respuesta = await fetch(
-//     `${req.protocol}://${req.get("host")}/api/paises/${req.params.id}`//`http://localhost:3000/api/paises/${req.params.id}`,    
-//     //`https://ddw-m3-sprint4-trabajopractico1.onrender.com/api/paises/${req.params.id}`,
-// );  
-// if (!respuesta.ok) {
-//     return res.status(404).send("Error al obtener el país");
-// }       
-// const pais = await respuesta.json();
-//     if (!pais) {
-//         return res.status(404).send("País no encontrado en la API");
-//     }   
-//     res.render("editPais", {
-//         pais,
-//         title: 'Editar País'
-//     });
-// });
+ router.get("/modificar/:id", async (req, res) => {      
+     const respuesta = await fetch(
+     `${req.protocol}://${req.get("host")}/api/paises/${req.params.id}`//`http://localhost:3000/api/paises/${req.params.id}`,    
+     //`https://ddw-m3-sprint4-trabajopractico1.onrender.com/api/paises/${req.params.id}`,
+ );  
+ if (!respuesta.ok) {
+     return res.status(404).send("Error al obtener el país");
+ }       
+ const pais = await respuesta.json();
+     if (!pais) {
+         return res.status(404).send("País no encontrado en la API");
+     }   
+     res.render("editPais", {
+         pais,
+         title: 'Editar País'
+     });
+ });
 
 export default router;  
 
