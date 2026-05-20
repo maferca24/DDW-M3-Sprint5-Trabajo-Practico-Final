@@ -1,0 +1,153 @@
+<h1>Editar: <%= pais.nombreOficial %>
+</h1>
+<div>
+    <div>
+        <form id="editForm">
+            <label>Nombre Oficial:
+                <input type="text" name="nombreOficial" value="<%= pais.nombreOficial %>" maxlength="90" minlength="3"
+                    required /> </label><br />
+            </label>
+            <label>Capital (separados por coma):
+                <input type="text" name="capital" value="<%= pais.capital.join(', ') %>" maxlength="90" minlength="3"
+                    required /> </label><br />
+            <label>Límites / Fronteras (3 letras mayúsculas, separados por comas):
+                <input type="text" name="limites" value="<%= pais.limites.join(', ') %>" required
+                    pattern="^[A-Z]{3}(,[A-Z]{3})*$" title="Tres letras mayúsculas separadas por coma (ej. CHI,BOL)" />
+            </label><br />
+            <label>Área (km²):
+                <input type="number" name="area" value="<%= pais.area %>" required min="1" /> </label><br />
+            <label>Población:
+                <input type="number" name="poblacion" value="<%= pais.poblacion %>" required min="1" /> </label><br />
+            <label>Zonas Horarias (separadas por comas):
+                <input type="text" name="zonasHorarias" value="<%= pais.zonasHorarias.join(', ') %>" /> </label><br />
+            <label>URL de la Bandera (Link SVG o PNG):
+                <input type="url" name="bandera" value="<%= pais.bandera %>" required /> </label><br />
+            <label>Creador:
+                <input type="text" name="creador" value="<%= pais.creador %>" readonly /> </label><br />
+            <br />
+            <button type="submit" class="boton">Actualizar</button>
+        </form>
+    </div>
+    <a href="/dashboard"><img src="/icons/volver-flecha.png" class="icon" alt="icon_volver"></a>
+</div>
+<script>
+    document
+        .getElementById("editForm")
+        .addEventListener("submit", async (e) => {
+
+            e.preventDefault();
+
+            const form = e.target;
+
+            // Función para convertir CSV en array limpio
+            const splitCSV = (val) =>
+                val
+                    .split(",")
+                    .map((s) => s.trim())
+                    .filter(Boolean);
+
+            // Obtener y limpiar datos
+            const nombreOficial = form.nombreOficial.value.trim();
+            const capital = splitCSV(form.capital.value);// Convertimos el string de capitales en un array limpio
+            const limites = splitCSV(form.limites.value); // Convertimos el string de límites en un array limpio  
+            const area = form.area.value;
+            const poblacion = form.poblacion.value;
+            const zonasHorarias = splitCSV(form.zonasHorarias.value);
+            const bandera = form.bandera.value.trim();// Aunque es un URL, aplicamos trim para eliminar espacios al inicio o final
+            const creador = form.creador.value.trim();//    Aunque es un campo readonly, aplicamos trim para mantener consistencia en la limpieza de datos    
+
+            // =========================
+            // VALIDACIONES
+            // =========================
+            const errors = [];
+            // nombreOficial
+            if (!nombreOficial) {
+                errors.push("El nombre oficial es obligatorio.");
+            } else {
+                if (nombreOficial.length < 3) {
+                    errors.push("El nombre oficial debe tener mínimo 3 caracteres.");
+                }
+                if (nombreOficial.length > 90) {
+                    errors.push("El nombre oficial debe tener máximo 90 caracteres.");
+                }
+            }
+            // capital
+            if (capital.length === 0) {
+                errors.push("La capital es obligatoria.");
+            } else {
+                capital.forEach((cap, index) => {
+                    if (!cap.trim()) {
+                        errors.push(`La capital #${index + 1} no puede estar vacía.`);
+                    }
+                    if (cap.length < 3) {
+                        errors.push(`La capital "${cap}" debe tener mínimo 3 caracteres.`);
+                    }
+                    if (cap.length > 90) {
+                        errors.push(`La capital "${cap}" debe tener máximo 90 caracteres.`);
+                    }
+                });
+            }
+            // limites
+            if (limites.length > 0) {
+                limites.forEach((limite, index) => {
+                    if (!/^[A-Z]{3}$/.test(limite)) {
+                        errors.push(`El límite #${index + 1} "${limite}" debe ser un código de 3 letras mayúsculas.`);
+                    }
+                });
+            }
+
+            // area
+            if (isNaN(area) || area <= 0) {
+                errors.push("El área debe ser un número positivo.");
+            }
+            // poblacion
+            if (isNaN(poblacion) || poblacion <= 0 || !Number.isInteger(Number(poblacion))) {
+                errors.push("La población debe ser un número entero positivo.");
+            }
+            // bandera
+            if (!bandera) {
+                errors.push("La URL de la bandera es obligatoria.");
+            }
+            // Mostrar errores
+            if (errors.length > 0) {
+                alert(errors.join("\n"));
+                return;
+            }
+            // Crear body
+            const body = {
+                nombreOficial,
+                capital,
+                limites,
+                area: Number(area),
+                poblacion: Number(poblacion),
+                zonasHorarias,
+                bandera,
+                creador
+            };
+
+            try {
+                const res = await fetch("/api/paises/id/<%= pais._id %>", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(body),
+                });
+
+                if (res.ok) {
+                    alert("¡País actualizado con éxito!");
+                    window.location.href = "/dashboard";
+                } else {
+                    const error = await res.json();
+                    alert(
+                        "Error al guardar: " +
+                        (error.message || JSON.stringify(error))
+                    );
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Error de conexión");
+            }
+
+        });
+</script>
