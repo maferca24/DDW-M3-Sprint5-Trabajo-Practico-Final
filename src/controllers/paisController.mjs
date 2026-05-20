@@ -49,6 +49,33 @@ export async function crearPaisController(req, res) {
         });
     }
 }
+// Controlador para actualizar un país existente
+export async function actualizarPaisController(req, res) {
+    try {
+       
+        //console.log("Cuerpo recibido:", req.body); // Verifica que el cuerpo de la solicitud se reciba correctamente
+        const { id } = req.params; // Toma el ID que viene en la URL /api/heroes/:id
+        const datosActualizados = req.body;
+
+        const pais = await actualizarPais(id, datosActualizados);
+
+        if (!pais) {
+            return res.status(404).send({ mensaje: "País no encontrado" });
+        }
+        // Respondemos con el objeto actualizado y un código 200 (Actualizado)
+        res.status(200).send({
+            mensaje: 'País actualizado con éxito',
+            datos: superheroe
+        });
+    } catch (error) {
+        res.status(500).send({
+            mensaje: 'Error al actualizar el país',
+            error: error.message
+        });
+    }
+}
+
+
 
 
 

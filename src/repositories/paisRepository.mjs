@@ -35,6 +35,7 @@ class PaisRepository extends IRepository {
         // ya que estamos usando una colección compartida (Grupo-04)
         return await Pais.find({ creador: "Fernanda", tipoDocumento: "pais" });
     }
+    // Función para crear un nuevo país a través del formulario del frontend
     async crear(pais) {
         try {
             // Usamos 'pais' que es lo que recibe la función
@@ -52,6 +53,25 @@ class PaisRepository extends IRepository {
         }
 
     }
+    // Función para actualizar un país existente a través del formulario del frontend
+    async actualizar(id, datosActualizados) {
+        try {
+            // Usamos 'datosActualizados' que es lo que recibe la función
+            const paisActualizado = await Pais.findByIdAndUpdate(
+                id,
+                datosActualizados,
+                { new: true, runValidators: true } // Devuelve el documento actualizado y ejecuta validaciones
+            );      
+            if (!paisActualizado) {
+                throw new Error('País no encontrado');
+            }   
+            console.log('País actualizado con éxito');
+            return paisActualizado;
+        } catch (error) {
+            console.error("Error en Repository:", error);
+            throw new Error('Error al actualizar el país en la base de datos');
+        }       
+    }
 }
+export default paisRepository;
 
-export default new PaisRepository();

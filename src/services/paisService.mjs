@@ -55,7 +55,7 @@ export const obtenerYProcesarPaises = async () => {
 export async function obtenerTodosLosPaises() {
     return await paisRepository.obtenerTodos();
 }
-
+// Servicio para crear un nuevo país a través del formulario del frontend,
 export async function crearPais(pais) {
     //Agregamos control para validar los datos antes de pasarlos al repositorio
     if (!pais.nombreOficial || !pais.capital) {
@@ -63,6 +63,17 @@ export async function crearPais(pais) {
     }
     return await paisRepository.crear(pais);
 }
+// Servicio para actualizar un país existente a través del formulario del frontend
+export async function actualizarPais(id, datosActualizados) {
+    //Agregamos control para validar los datos antes de pasarlos al repositorio
+    if (!datosActualizados.nombreOficial || !datosActualizados.capital) {
+        throw new Error("El nombre oficial y la capital son obligatorios.");
+    }       
+    return await paisRepository.actualizar(id, datosActualizados);
+}
+
+
+
 
 
 

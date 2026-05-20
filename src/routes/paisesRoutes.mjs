@@ -21,6 +21,9 @@ router.get('/sincronizar', async (req, res) => {
 //router.post('/paises', validatePais, crearPaisController);
 router.post('/paises', crearPaisController);
 
+// Ruta para editar un pais existente (desde el formulario del frontend)
+//router.put('/paises/id/:id', validateSuperHeroe, actualizarSuperHeroeController);
+router.put('/paises/id/:id', actualizarPaisController);
 export default router;
 
 
