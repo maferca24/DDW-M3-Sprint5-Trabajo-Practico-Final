@@ -1,5 +1,9 @@
+// El servicio es el encargado de contener la lógica de negocio de la aplicación, es decir, las operaciones que se realizan sobre los datos.
+
 import axios from 'axios';// Importamos axios para hacer la petición HTTP -para consumir la API externa y obtener los datos de los países
 import paisRepository from '../repositories/paisRepository.mjs';// Importamos el repositorio 
+
+
 // de países para interactuar con la base de datos
 
 //Servicio para obtener y procesar los datos de la API externa, filtrando solo los países de América que hablen español 
@@ -49,7 +53,6 @@ export const obtenerYProcesarPaises = async () => {
         throw new Error("No se pudo obtener la información de la API externa");
     }
 };
-
 // Servicio para tomar los datos del base y pasar a la vista del dashboard, 
 // para mostrar la lista de países en el frontend
 export async function obtenerTodosLosPaises() {

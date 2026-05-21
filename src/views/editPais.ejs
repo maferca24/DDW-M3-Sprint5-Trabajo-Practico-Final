@@ -49,7 +49,7 @@
             // Obtener y limpiar datos
             const nombreOficial = form.nombreOficial.value.trim();
             const capital = splitCSV(form.capital.value);// Convertimos el string de capitales en un array limpio
-            const l = splitCSV(form.limites.value); // Convertimos el string de límites en un array limpio  
+            const limites = splitCSV(form.limites.value); // Convertimos el string de límites en un array limpio  
             const area = form.area.value;
             const poblacion = form.poblacion.value;
             const zonasHorarias = splitCSV(form.zonasHorarias.value);
@@ -115,14 +115,17 @@
             }
             // Crear body
             const body = {
-                nombreOficial,
+                nombreOficial, // Mongoose usa 'nombreOficial'
                 capital,
-                limites,
+                borders: limites,      // 
                 area: Number(area),
-                poblacion: Number(poblacion),
-                zonasHorarias,
+                population: Number(poblacion), // Mongoose usa 'population'
+                timezones: zonasHorarias,
                 bandera,
-                creador
+                creador,
+                tipoDocumento: "pais"  // Mongoose usa 'tipoDocumento'
+
+
             };
 
             try {
@@ -148,6 +151,6 @@
                 console.error(error);
                 alert("Error de conexión");
             }
-        
-    });
+
+        });
 </script>

@@ -4,7 +4,7 @@ import { obtenerYProcesarPaises, crearPais } from '../services/paisService.mjs';
 import paisRepository from '../repositories/paisRepository.mjs';// Importar el repositorio que guarda los datos en la base de datos
 const router = express.Router();
 
-import { getDashboardController, crearPaisController } from "../controllers/paisController.mjs"; 
+import { getDashboardController, crearPaisController, actualizarPaisController } from "../controllers/paisController.mjs"; 
 
 // Ruta para probar cargar la base de datos
 router.get('/sincronizar', async (req, res) => {

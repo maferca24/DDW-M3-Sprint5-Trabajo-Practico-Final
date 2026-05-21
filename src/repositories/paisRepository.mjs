@@ -1,6 +1,5 @@
 // El repositorio es el encargado de interactuar con la base de datos. En este caso, con MongoDB a través de Mongoose.
 // Aquí definimos las funciones para guardar los países obtenidos de la API externa, para obtener los países guardados en la base de datos.
-
 import Pais from '../models/paisModel.mjs';// Importamos el modelo de Mongoose para poder interactuar con la base de datos
 import IRepository from './IRepository.mjs' // Importamos la interfaz para asegurarnos de implementar los métodos necesarios
 
@@ -73,5 +72,7 @@ class PaisRepository extends IRepository {
         }       
     }
 }
-export default paisRepository;
+export default new PaisRepository();// Exportamos una instancia de la clase para usarla en el servicio y el controlador
+
+
 
