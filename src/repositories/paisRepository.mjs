@@ -69,22 +69,33 @@ class PaisRepository extends IRepository {
     }
     // Función para actualizar un país existente a través del formulario del frontend
     async actualizar(id, datosActualizados) {
-        try {
-            // Usamos 'datosActualizados' que es lo que recibe la función
-            const paisActualizado = await Pais.findByIdAndUpdate(
+         try {
+            return await Pais.findByIdAndUpdate(
                 id,
-                datosActualizados,
-                { new: true, runValidators: true } // Devuelve el documento actualizado y ejecuta validaciones
-            );      
-            if (!paisActualizado) {
-                throw new Error('País no encontrado');
-            }   
-            console.log('País actualizado con éxito');
-            return paisActualizado;
+                { $set: datosActualizados },
+                { returnDocument:"after" }
+            );
         } catch (error) {
-            console.error("Error en Repository:", error);
             throw new Error('Error al actualizar el país en la base de datos');
-        }       
+        }
+
+
+        // try {
+        //     // Usamos 'datosActualizados' que es lo que recibe la función
+        //     const paisActualizado = await Pais.findByIdAndUpdate(
+        //         id,
+        //         datosActualizados,
+        //         { new: true, runValidators: true } // Devuelve el documento actualizado y ejecuta validaciones
+        //     );      
+        //     if (!paisActualizado) {
+        //         throw new Error('País no encontrado');
+        //     }   
+        //     console.log('País actualizado con éxito');
+        //     return paisActualizado;
+        // } catch (error) {
+        //     console.error("Error en Repository:", error);
+        //     throw new Error('Error al actualizar el país en la base de datos');
+        // }       
     }
 }
 export default new PaisRepository();// Exportamos una instancia de la clase para usarla en el servicio y el controlador
