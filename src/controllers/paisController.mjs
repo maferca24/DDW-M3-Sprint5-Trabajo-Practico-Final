@@ -34,21 +34,45 @@ export async function obtenerTodosLosPaisesController(req, res) {
 // Controlador para obtener un país por ID
 export async function obtenerPaisPorIdController(req, res) {
     try {
-        const { id } = req.params; // Toma el ID que viene en la URL /api/paises/:id
+
+        const { id } = req.params;
+
         const pais = await obtenerPaisPorId(id);
+
         if (!pais) {
-            return res.status(404).send({ mensaje: "País no encontrado" });
+
+            return res.status(404).send({ mensaje: 'País no encontrado' });
+
         }
-        res.status(200).send({
-            mensaje: 'País encontrado con éxito',
-            datos: pais
-        });
+        //const paisFormateado = renderizarPais(pais);
+
+        res.status(200).json(pais);
+
     } catch (error) {
+
         res.status(500).send({
             mensaje: 'Error al obtener el país',
+
             error: error.message
         });
     }
+
+    // try {
+    //     const { id } = req.params; // Toma el ID que viene en la URL /api/paises/:id
+    //     const pais = await obtenerPaisPorId(id);
+    //     if (!pais) {
+    //         return res.status(404).send({ mensaje: "País no encontrado" });
+    //     }
+    //     res.status(200).send({
+    //         mensaje: 'País encontrado con éxito',
+    //         datos: pais
+    //     });
+    // } catch (error) {
+    //     res.status(500).send({
+    //         mensaje: 'Error al obtener el país',
+    //         error: error.message
+    //     });
+    // }
 }   
 
 // Controlador para crear un nuevo país
