@@ -112,4 +112,26 @@
         // Redirigimos a la página de edición con el ID del héroe
         window.location.href = "/dashboard/modificar/" + id;
     } 
+     async function eliminar(id, nombre) {
+        const confirmar = confirm("¿Estás seguro que deseas eliminar a " + nombre + "? Esta acción no se puede deshacer.");
+
+        if (!confirmar) return;
+
+        try {
+            const res = await fetch("/api/paises/id/" + id, { method: "DELETE" });
+
+            if (res.ok) {
+                //
+                alert(nombre + " eliminado correctamente."); // 
+                // Refrescamos la página para que desaparezca de la lista
+                window.location.reload();
+            } else {
+                const errorData = await res.json();
+                alert("Error al eliminar: " + (errorData.mensaje || "Error desconocido"));
+            }
+        } catch (error) {
+            console.error("Error en la petición:", error);
+            alert("No se pudo conectar con el servidor.");
+        }
+    }
 </script>

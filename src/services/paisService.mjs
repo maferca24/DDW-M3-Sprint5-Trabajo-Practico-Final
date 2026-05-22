@@ -78,7 +78,9 @@ export async function actualizarPais(id, datosActualizados) {
     }       
     return await paisRepository.actualizar(id, datosActualizados);
 }
-
+export async function eliminarPaisporId(id) {
+    return await paisRepository.eliminarPorId(id);
+}
 
 
 

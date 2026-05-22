@@ -36,11 +36,11 @@ class PaisRepository extends IRepository {
     }
     // Función para obtener un país por ID, para mostrar los datos en el formulario de edición
     async obtenerPorId(id) {
-        try {   
+        try {
             const pais = await Pais.findById(id);
             if (!pais) {
                 throw new Error('País no encontrado');
-            }   
+            }
             return pais;
         } catch (error) {
             console.error("Error al obtener el país por ID:", error);
@@ -69,36 +69,27 @@ class PaisRepository extends IRepository {
     }
     // Función para actualizar un país existente a través del formulario del frontend
     async actualizar(id, datosActualizados) {
-         try {
+        try {
             return await Pais.findByIdAndUpdate(
                 id,
                 { $set: datosActualizados },
-                { returnDocument:"after" }
+                { returnDocument: "after" }
             );
         } catch (error) {
             throw new Error('Error al actualizar el país en la base de datos');
         }
 
 
-        // try {
-        //     // Usamos 'datosActualizados' que es lo que recibe la función
-        //     const paisActualizado = await Pais.findByIdAndUpdate(
-        //         id,
-        //         datosActualizados,
-        //         { new: true, runValidators: true } // Devuelve el documento actualizado y ejecuta validaciones
-        //     );      
-        //     if (!paisActualizado) {
-        //         throw new Error('País no encontrado');
-        //     }   
-        //     console.log('País actualizado con éxito');
-        //     return paisActualizado;
-        // } catch (error) {
-        //     console.error("Error en Repository:", error);
-        //     throw new Error('Error al actualizar el país en la base de datos');
-        // }       
+
+    }
+    async eliminarPaisporId(id) {
+        try {
+            return await Pais.findByIdAndDelete(id);
+        } catch (error) {
+            throw new Error('Error al eliminar el país en la base de datos');
+        }
     }
 }
 export default new PaisRepository();// Exportamos una instancia de la clase para usarla en el servicio y el controlador
-
 
 

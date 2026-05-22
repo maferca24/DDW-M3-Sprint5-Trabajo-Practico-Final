@@ -2,7 +2,7 @@
 //a la capa de servicios para realizar las operaciones necesarias
 // El controlador es el encargado de recibir las solicitudes del cliente, procesarlas (si es necesario) y llamar a los servicios 
 // para obtener los datos o realizar las operaciones necesarias. Luego, devuelve la respuesta al cliente, ya sea renderizando una vista o enviando un JSON.
-import { obtenerTodosLosPaises, crearPais, actualizarPais, obtenerPaisPorId }
+import { obtenerTodosLosPaises, crearPais, actualizarPais, obtenerPaisPorId, eliminarPaisporId }
     from "../services/paisService.mjs";
 
 //importa vistas para renderizar respuestas
@@ -115,6 +115,28 @@ export async function actualizarPaisController(req, res) {
     } catch (error) {
         res.status(500).send({
             mensaje: 'Error al actualizar el país',
+            error: error.message
+        });
+    }
+}
+
+export async function eliminarPaisporIdController(req, res) {
+    try {
+        const { id } = req.params; // Toma el ID que viene en la URL /api/paises/id/:id
+
+        const pais = await eliminarPaisporId(id);
+
+        if (!pais) {
+            return res.status(404).send({ mensaje: "País no encontrado" });
+        }
+        // Respondemos con el objeto actualizado y un código 200 (Actualizado)
+        res.status(200).send({
+            mensaje: 'País eliminado con éxito',
+            datos: pais
+        });
+    } catch (error) {
+        res.status(500).send({
+            mensaje: 'Error al eliminar el país',
             error: error.message
         });
     }
