@@ -2,7 +2,6 @@ class IRepository {
     obtenerTodos() {
         throw new Error("Método 'obtenerTodos()' no implementado");
     }
-
     // Nuevo método para guardar múltiples registros (Para tomar datos de la API externa)
     guardarMuchos(datos) {
         throw new Error("Método 'guardarMuchos()' no implementado");

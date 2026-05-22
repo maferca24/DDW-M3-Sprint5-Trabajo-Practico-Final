@@ -9,7 +9,9 @@
             </label>
             <label>Capital (separados por coma):
                 <input type="text" name="capital" value="<%= pais.capital.join(', ') %>" maxlength="90" minlength="3"
-                    required /> </label><br />
+                    required /> </label><br/>
+
+
             <label>Límites / Fronteras (3 letras mayúsculas, separados por comas):
                 <input type="text" name="limites" value="<%= pais.borders.join(', ') %>" required
                     pattern="^[A-Z]{3}(,[A-Z]{3})*$" title="Tres letras mayúsculas separadas por coma (ej. CHI,BOL)" />

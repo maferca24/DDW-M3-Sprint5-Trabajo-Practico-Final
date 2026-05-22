@@ -34,6 +34,21 @@ class PaisRepository extends IRepository {
         // ya que estamos usando una colección compartida (Grupo-04)
         return await Pais.find({ creador: "Fernanda", tipoDocumento: "pais" });
     }
+    // Función para obtener un país por ID, para mostrar los datos en el formulario de edición
+    async obtenerPorId(id) {
+        try {   
+            const pais = await Pais.findById(id);
+            if (!pais) {
+                throw new Error('País no encontrado');
+            }   
+            return pais;
+        } catch (error) {
+            console.error("Error al obtener el país por ID:", error);
+            throw new Error('Error al obtener el país de la base de datos');
+        }
+        return await Pais.findById(id);
+    }
+
     // Función para crear un nuevo país a través del formulario del frontend
     async crear(pais) {
         try {

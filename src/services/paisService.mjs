@@ -58,6 +58,10 @@ export const obtenerYProcesarPaises = async () => {
 export async function obtenerTodosLosPaises() {
     return await paisRepository.obtenerTodos();
 }
+//Servicio para obtener un país por ID, para mostrar los datos en el formulario de edición
+export async function obtenerPaisPorId(id) {
+    return await paisRepository.obtenerPorId(id);
+}
 // Servicio para crear un nuevo país a través del formulario del frontend,
 export async function crearPais(pais) {
     //Agregamos control para validar los datos antes de pasarlos al repositorio

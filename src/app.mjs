@@ -3,6 +3,7 @@ import path from 'path'; // Importar el módulo 'path' para manejar rutas de arc
 import expressLayouts from 'express-ejs-layouts'; // Importar el middleware 'express-ejs-layouts' para usar layouts con EJS
 import { connectDB } from './config/dbConfig.mjs'; // Importar la función 'connectDB' para conectar a la base de datos MongoDB
 import paisesRoutes from './routes/paisesRoutes.mjs'; // Importar las rutas de la API para paises
+//import { paisesRoutes } from './routes/paisesRoutes.mjs'; // Importar las rutas de la API para paises
 import paisesfront from './routes/paisesFront.mjs'; // Importar las rutas del frontend para paises
 
 const app = express(); // Crear instancia de Express
