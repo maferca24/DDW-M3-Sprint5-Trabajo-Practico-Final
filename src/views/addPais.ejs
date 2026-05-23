@@ -20,34 +20,52 @@
             
             <div>
                 <label for="nombreOficial" class="block text-sm font-medium text-gray-700 mb-1">Nombre Oficial:</label>
-                <input type="text" id="nombreOficial" name="nombreOficial" maxlength="90" minlength="3" required
+                <!--Comente validaciones HTML5 para manejarlo todo con JavaScript y mostrar alertas personalizadas, 
+                pero puedes volver a activarlas si prefieres la validación nativa del navegador-->
+                 <!-- <input type="text" id="nombreOficial" name="nombreOficial" maxlength="90" minlength="3" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                       placeholder="Ej. República Argentina">  -->
+                <input type="text" id="nombreOficial" name="nombreOficial" 
                        class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                        placeholder="Ej. República Argentina">
             </div>
 
             <div>
                 <label for="capital" class="block text-sm font-medium text-gray-700 mb-1">Capital (separados por coma):</label>
-                <input type="text" id="capital" name="capital" maxlength="90" minlength="3" required
+                <!-- <input type="text" id="capital" name="capital" maxlength="90" minlength="3" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                       placeholder="Ej. Ciudad Autonoma de Buenos Aires"> -->
+                <input type="text" id="capital" name="capital" 
                        class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                        placeholder="Ej. Ciudad Autonoma de Buenos Aires">
             </div>
             <div>
                 <label for="limites" class="block text-sm font-medium text-gray-700 mb-1">Límites / Fronteras (3 letras mayúsculas, separados por comas):</label>
-                <input type="text" id="limites" name="limites" required pattern="^[A-Z]{3}(,[A-Z]{3})*$" title="Tres letras mayúsculas separadas por coma (ej. CHI,BOL)""
+                <!-- <input type="text" id="limites" name="limites" required pattern="^[A-Z]{3}(,[A-Z]{3})*$" title="Tres letras mayúsculas separadas por coma (ej. CHI,BOL)""
+                       class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                       placeholder="Ej. CHI, BOL"> -->
+                       <input type="text" id="limites" name="limites" 
                        class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                        placeholder="Ej. CHI, BOL">
+
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label for="area" class="block text-sm font-medium text-gray-700 mb-1">Área (km²):</label>
-                    <input type="number" id="area" name="area" required min="1"
+                    <!-- <input type="number" id="area" name="area" required min="1"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                           placeholder="51100"> -->
+                    <input type="number" id="area" name="area" 
                            class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                            placeholder="51100">
                 </div>
                 <div>
                     <label for="poblacion" class="block text-sm font-medium text-gray-700 mb-1">Población:</label>
-                    <input type="number" id="poblacion" name="poblacion" required min="1"
+                    <!-- <input type="number" id="poblacion" name="poblacion" required min="1"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                           placeholder="5150000"> -->
+                    <input type="number" id="poblacion" name="poblacion" 
                            class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                            placeholder="5150000">
                 </div>
@@ -62,8 +80,10 @@
 
             <div>
                 <label for="bandera" class="block text-sm font-medium text-gray-700 mb-1">URL de la Bandera (Link SVG o PNG):</label>
-                <input type="url" id="bandera" name="bandera" required
+                <!-- <input type="url" id="bandera" name="bandera" required
                        class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                       placeholder="https://flagcdn.com/cr.svg"> -->
+                       <input type="url" id="bandera" name="bandera" class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                        placeholder="https://flagcdn.com/cr.svg">
             </div>
 
