@@ -81,13 +81,9 @@
                                     <div class="flex justify-center items-center gap-2">
                                         <button class="bg-blue-50 hover:bg-blue-100 text-blue-600 py-1 px-2.5 rounded transition duration-150 border border-blue-200 btn-edit" onclick="editar('<%= pais._id %>')">
                                             Modificar
-                                        </button>
-                                        
-                                        <button onclick="location.href='/dashboard/eliminar/<%= pais.cca3 %>'" class="bg-red-50 hover:bg-red-100 text-red-600 py-1 px-2.5 rounded transition duration-150 border border-red-200">
+                                        </button>                                                                          
+                                        <button class="bg-red-50 hover:bg-red-100 text-red-600 py-1 px-2.5 rounded transition duration-150 border border-red-200 btn-delete" onclick="eliminar('<%= pais._id %>', '<%= pais.nombreOficial %>')">
                                             Eliminar
-                                        </button>
-                                        <button class="bg-red-600 hover:bg-red-700 text-white py-1 px-2.5 rounded shadow-sm transition duration-150 btn-delete" onclick="eliminar('<%= pais._id %>', '<%= pais.nombreOficial %>')">
-                                            Borrar
                                         </button>
                                     </div>
                                 </td>

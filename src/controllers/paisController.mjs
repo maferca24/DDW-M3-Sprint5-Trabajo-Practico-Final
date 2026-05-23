@@ -14,7 +14,7 @@ import { obtenerTodosLosPaises, crearPais, actualizarPais, obtenerPaisPorId, eli
 export async function getDashboardController(req, res) {
     const paises = await obtenerTodosLosPaises(); // Llama al servicio que obtiene los países de la base de datos        
     //vista a renderizar con los datos de los países
-    console.log(paises);
+    //console.log(paises);
     res.render("dashboard", { paises, title: 'Dashboard de Países' });    
 }   
 export async function obtenerTodosLosPaisesController(req, res) {
@@ -122,6 +122,7 @@ export async function actualizarPaisController(req, res) {
 
 export async function eliminarPaisporIdController(req, res) {
     try {
+        console.log("ID recibido para eliminación:", req.params.id); // Verifica que el ID se reciba correctamente en la ruta
         const { id } = req.params; // Toma el ID que viene en la URL /api/paises/id/:id
 
         const pais = await eliminarPaisporId(id);

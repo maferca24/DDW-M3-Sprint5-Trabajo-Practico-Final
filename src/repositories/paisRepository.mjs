@@ -82,7 +82,7 @@ class PaisRepository extends IRepository {
 
 
     }
-    async eliminarPaisporId(id) {
+    async eliminarPorId(id) {
         try {
             return await Pais.findByIdAndDelete(id);
         } catch (error) {
