@@ -31,10 +31,6 @@ router.get("/modificar/:id", async (req, res) => {
     });
 });
 
-router.get("/acercade", (req, res) => {
-    res.render("about", { title: 'Acerca de' });// Renderiza la vista about.ejs para mostrar la página de "Acerca de"
-});
-
 export default router;
 
 // //Consejo:

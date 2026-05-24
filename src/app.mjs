@@ -43,6 +43,12 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get("/acerca-de", (req, res) => {
+    res.render("about", { title: 'Acerca de' 
+
+    });// Renderiza la vista about.ejs para mostrar la página de "Acerca de"
+});
+
 // Rutas de la API (Backend)
 app.use('/api', paisesRoutes);
 
