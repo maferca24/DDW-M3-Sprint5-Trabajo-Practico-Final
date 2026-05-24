@@ -64,7 +64,7 @@
 
             <!-- Pasos de Ejecución -->
             <section>
-                <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2 mb-3">
+                <h2 class="text-lg font-bold text-gray-500 flex items-center gap-2 mb-3">
                     <span class="p-1.5 bg-emerald-50 text-emerald-600 rounded-lg text-sm"></span>
                     Pasos de Ejecución
                 </h2>
@@ -75,10 +75,15 @@
                         <p> -Configurar conexión a la base de datos</p>
                         <p> -Iniciar el servidor en modo desarrollo</p>
                         <p> -Acceder a la aplicación en el navegador</p>
+                        <!---- Instrucción de inicialización--Luego modificar si creo botón para incializar sincronización automática al iniciar el servidor-->
+                        <p><span class="text-red-600">IMPORTANTE</span>- Instrucción de inicialización (SINCRONIZAR API):</p>
+                        <p>Para poblar la base de datos automáticamente con los países hispanohablantes</p>
+                        <p>filtrados por el servicio de Axios, ejecuta una petición POST mediante</p>
+                        <p>Postman o desde la consola a la siguiente URL de prueba:</p>
+                        <p><span class="text-amber-400">POST</span> http://localhost:3000/api/paises/sincronizar</p>
                     </div>
                 </div>
             </section>
-
             <hr class="border-gray-150" />
 
             <!-- Consideraciones Especiales -->
