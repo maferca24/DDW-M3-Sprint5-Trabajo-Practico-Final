@@ -2,7 +2,7 @@
     
     <div class="mb-6">
         <a href="/dashboard" class="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition duration-150">
-            <svg xmlns="http://www.w3.org/2000/xl" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Volver al Dashboard
@@ -31,13 +31,13 @@
 
             <div>
                 <label for="capital" class="block text-sm font-medium text-gray-700 mb-1">Capital (separados por coma):</label>
-                <input type="text" id="capital" name="capital" value="<%= pais.capital.join(', ') %>" maxlength="90" minlength="3" required
+                <input type="text" id="capital" name="capital" value="<%= pais.capital.join(', ') %>" required
                        class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
             </div>
 
             <div>
                 <label for="limites" class="block text-sm font-medium text-gray-700 mb-1">Límites / Fronteras (3 letras mayúsculas, separados por comas):</label>
-                <input type="text" id="limites" name="limites" value="<%= pais.borders.join(', ') %>" required
+                <input type="text" id="limites" name="limites" value="<%= pais.borders.join(', ') %>"
                        pattern="^[A-Z]{3}(,[A-Z]{3})*$" title="Tres letras mayúsculas separadas por coma (ej. CHI, BOL)"
                        class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
             </div>
@@ -45,19 +45,19 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label for="area" class="block text-sm font-medium text-gray-700 mb-1">Área (km²):</label>
-                    <input type="number" id="area" name="area" value="<%= pais.area %>" required min="1"
+                    <input type="number" id="area" name="area" value="<%= pais.area %>" required min="1" step="any"
                            class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
                 </div>
                 <div>
                     <label for="poblacion" class="block text-sm font-medium text-gray-700 mb-1">Población:</label>
-                    <input type="number" id="poblacion" name="poblacion" value="<%= pais.population %>" required min="1"
+                    <input type="number" id="poblacion" name="poblacion" value="<%= pais.population %>" required min="1" step="1"
                            class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
                 </div>
             </div>
 
             <div>
                 <label for="zonasHorarias" class="block text-sm font-medium text-gray-700 mb-1">Zonas Horarias (separadas por comas):</label>
-                <input type="text" id="zonasHorarias" name="zonasHorarias" value="<%= pais.timezones.join(', ') %>"
+                <input type="text" id="zonasHorarias" name="zonasHorarias" value="<%= pais.timezones.join(', ') %>" required
                        class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
             </div>
 
@@ -102,15 +102,15 @@
         const nombreOficial = form.nombreOficial.value.trim();
         const capital = splitCSV(form.capital.value);
         const limites = splitCSV(form.limites.value);  
-        const area = form.area.value;
-        const poblacion = form.poblacion.value;
+        const area = parseFloat(form.area.value);
+        const poblacion = parseInt(form.poblacion.value);
         const zonasHorarias = splitCSV(form.zonasHorarias.value);
         const bandera = form.bandera.value.trim();
         const creador = form.creador.value.trim();    
 
-        // =========================
-        // VALIDACIONES
-        // =========================
+        // ==========================================
+        // VALIDACIONES DE FRONTEND
+        // ==========================================
         const errors = [];
         
         // nombreOficial
@@ -125,7 +125,7 @@
         if (capital.length === 0) {
             errors.push("La capital es obligatoria.");
         } else {
-            capital.forEach((cap, index) => {
+            capital.forEach((cap) => {
                 if (cap.length < 3) errors.push(`La capital "${cap}" debe tener mínimo 3 caracteres.`);
                 if (cap.length > 90) errors.push(`La capital "${cap}" debe tener máximo 90 caracteres.`);
             });
@@ -146,7 +146,7 @@
         }
         
         // poblacion
-        if (isNaN(poblacion) || poblacion <= 0 || !Number.isInteger(Number(poblacion))) {
+        if (isNaN(poblacion) || poblacion <= 0 || !Number.isInteger(poblacion)) {
             errors.push("La población debe ser un número entero positivo.");
         }
         
@@ -155,19 +155,19 @@
             errors.push("La URL de la bandera es obligatoria.");
         }
         
-        // Mostrar errores
+        // Mostrar errores detectados en el Frontend
         if (errors.length > 0) {
             alert("Por favor corrige los siguientes errores:\n\n" + errors.join("\n"));
             return;
         }
         
-        // Crear body estructurado exactamente como lo espera Mongoose
+        // Estructura limpia para enviar a Express/Mongoose
         const body = {
             nombreOficial, 
             capital,
             borders: limites,      
-            area: Number(area),
-            population: Number(poblacion), 
+            area,
+            population: poblacion, 
             timezones: zonasHorarias,
             bandera,
             creador,
@@ -187,8 +187,16 @@
                 alert("¡País actualizado con éxito!");
                 window.location.href = "/dashboard";
             } else {
-                const error = await res.json();
-                alert("Error al guardar: " + (error.message || JSON.stringify(error)));
+                const errorData = await res.json();
+                console.error("Error del servidor:", errorData);
+                
+                // Si express-validator frena la petición en el PUT, listamos los errores aquí
+                if (errorData.errors && Array.isArray(errorData.errors)) {
+                    const mensajesBackend = errorData.errors.map(err => `• ${err.msg}`).join("\n");
+                    alert("Validación rechazada por el Servidor:\n\n" + mensajesBackend);
+                } else {
+                    alert("Error al guardar: " + (errorData.message || "Error desconocido en el servidor."));
+                }
             }
         } catch (error) {
             console.error(error);
@@ -196,161 +204,3 @@
         }
     });
 </script>
-<!-- <h1>Editar: <%= pais.nombreOficial %>
-</h1>
-<div>
-    <div>
-        <form id="editForm">
-            <label>Nombre Oficial:
-                <input type="text" name="nombreOficial" value="<%= pais.nombreOficial %>" maxlength="90" minlength="3"
-                    required /> </label><br />
-            </label>
-            <label>Capital (separados por coma):
-                <input type="text" name="capital" value="<%= pais.capital.join(', ') %>" maxlength="90" minlength="3"
-                    required /> </label><br/>
-
-
-            <label>Límites / Fronteras (3 letras mayúsculas, separados por comas):
-                <input type="text" name="limites" value="<%= pais.borders.join(', ') %>" required
-                    pattern="^[A-Z]{3}(,[A-Z]{3})*$" title="Tres letras mayúsculas separadas por coma (ej. CHI,BOL)" />
-            </label><br />
-            <label>Área (km²):
-                <input type="number" name="area" value="<%= pais.area %>" required min="1" /> </label><br />
-            <label>Población:
-                <input type="number" name="poblacion" value="<%= pais.population %>" required min="1" /> </label><br />
-            <label>Zonas Horarias (separadas por comas):
-                <input type="text" name="zonasHorarias" value="<%= pais.timezones.join(', ') %>" /> </label><br />
-            <label>URL de la Bandera (Link SVG o PNG):
-                <input type="url" name="bandera" value="<%= pais.bandera %>" required /> </label><br />
-            <label>Creador:
-                <input type="text" name="creador" value="<%= pais.creador %>" readonly /> </label><br />
-            <br />
-            <button type="submit" class="boton">Actualizar</button>
-        </form>
-    </div>
-    <a href="/dashboard"><img src="/icons/volver-flecha.png" class="icon" alt="icon_volver"></a>
-</div>
-<script>
-    document
-        .getElementById("editForm")
-        .addEventListener("submit", async (e) => {
-
-            e.preventDefault();
-
-            const form = e.target;
-
-            // Función para convertir CSV en array limpio
-            const splitCSV = (val) =>
-                val
-                    .split(",")
-                    .map((s) => s.trim())
-                    .filter(Boolean);
-
-            // Obtener y limpiar datos
-            const nombreOficial = form.nombreOficial.value.trim();
-            const capital = splitCSV(form.capital.value);// Convertimos el string de capitales en un array limpio
-            const limites = splitCSV(form.limites.value); // Convertimos el string de límites en un array limpio  
-            const area = form.area.value;
-            const poblacion = form.poblacion.value;
-            const zonasHorarias = splitCSV(form.zonasHorarias.value);
-            const bandera = form.bandera.value.trim();// Aunque es un URL, aplicamos trim para eliminar espacios al inicio o final
-            const creador = form.creador.value.trim();//    Aunque es un campo readonly, aplicamos trim para mantener consistencia en la limpieza de datos    
-
-            // =========================
-            // VALIDACIONES
-            // =========================
-            const errors = [];
-            // nombreOficial
-            if (!nombreOficial) {
-                errors.push("El nombre oficial es obligatorio.");
-            } else {
-                if (nombreOficial.length < 3) {
-                    errors.push("El nombre oficial debe tener mínimo 3 caracteres.");
-                }
-                if (nombreOficial.length > 90) {
-                    errors.push("El nombre oficial debe tener máximo 90 caracteres.");
-                }
-            }
-            // capital
-            if (capital.length === 0) {
-                errors.push("La capital es obligatoria.");
-            } else {
-                capital.forEach((cap, index) => {
-                    if (!cap.trim()) {
-                        errors.push(`La capital #${index + 1} no puede estar vacía.`);
-                    }
-                    if (cap.length < 3) {
-                        errors.push(`La capital "${cap}" debe tener mínimo 3 caracteres.`);
-                    }
-                    if (cap.length > 90) {
-                        errors.push(`La capital "${cap}" debe tener máximo 90 caracteres.`);
-                    }
-                });
-            }
-            // limites
-            if (limites.length > 0) {
-                limites.forEach((limite, index) => {
-                    if (!/^[A-Z]{3}$/.test(limite)) {
-                        errors.push(`El límite #${index + 1} "${limite}" debe ser un código de 3 letras mayúsculas.`);
-                    }
-                });
-            }
-
-            // area
-            if (isNaN(area) || area <= 0) {
-                errors.push("El área debe ser un número positivo.");
-            }
-            // poblacion
-            if (isNaN(poblacion) || poblacion <= 0 || !Number.isInteger(Number(poblacion))) {
-                errors.push("La población debe ser un número entero positivo.");
-            }
-            // bandera
-            if (!bandera) {
-                errors.push("La URL de la bandera es obligatoria.");
-            }
-            // Mostrar errores
-            if (errors.length > 0) {
-                alert(errors.join("\n"));
-                return;
-            }
-            // Crear body
-            const body = {
-                nombreOficial, // Mongoose usa 'nombreOficial'
-                capital,
-                borders: limites,      // 
-                area: Number(area),
-                population: Number(poblacion), // Mongoose usa 'population'
-                timezones: zonasHorarias,
-                bandera,
-                creador,
-                tipoDocumento: "pais"  // Mongoose usa 'tipoDocumento'
-
-
-            };
-
-            try {
-                const res = await fetch("/api/paises/id/<%= pais._id %>", {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(body),
-                });
-
-                if (res.ok) {
-                    alert("¡País actualizado con éxito!");
-                    window.location.href = "/dashboard";
-                } else {
-                    const error = await res.json();
-                    alert(
-                        "Error al guardar: " +
-                        (error.message || JSON.stringify(error))
-                    );
-                }
-            } catch (error) {
-                console.error(error);
-                alert("Error de conexión");
-            }
-
-        });
-</script> -->

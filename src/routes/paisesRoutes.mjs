@@ -22,14 +22,12 @@ router.get('/sincronizar', async (req, res) => {
 
 // Ruta para agregar un nuevo país (desde el formulario del frontend)
 router.post('/paises', validatePais, crearPaisController);
-//router.post('/paises', crearPaisController);
 
 // Ruta para editar un pais existente (desde el formulario del frontend)
-//router.put('/paises/id/:id', validateSuperHeroe, actualizarSuperHeroeController);
-router.put('/paises/id/:id', actualizarPaisController);
+router.put('/paises/id/:id', validatePais, actualizarPaisController);
 
 //Ruta para obtener un país por ID (para mostrar los datos en el formulario de edición)
-// //http://localhost:3000/api/paises/69c6fd59d90e243b1c0fad1b
+// http://localhost:3000/api/paises/69c6fd59d90e243b1c0fad1b
 router.get('/paises/:id', obtenerPaisPorIdController);
 
 //ruta para eliminar un país por ID (desde el botón de eliminar en el frontend)
