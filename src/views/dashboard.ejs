@@ -116,9 +116,7 @@ AVANZADO:gini, suma de population, suma de area, promedio de gini.-->
                                         </td>
                                     </tr>
                                     <% } %>
-
-                </tbody>
-                <!------------Codigo para agregar Totales-->
+                                    <!------------Codigo para agregar Totales-->
                 <% <!--Inicializamos las variables acumuladoras antes del bucle-->
                     let totalArea = 0;
                     let totalPoblacion = 0;
@@ -152,27 +150,34 @@ AVANZADO:gini, suma de population, suma de area, promedio de gini.-->
                         <% <!--Calcular el promedio del Gini de forma segura para evitar división por cero-->
                             let promedioGini = paisesConGini > 0 ? (sumaGini / paisesConGini).toFixed(1) : 0;
                             %>
-                            <tr class="bg-gray-100 font-bold border-t-2 border-gray-300">
+                            <tr class="bg-gray-50 font-bold border-t-2 border-gray-300">
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">TOTALES / PROMEDIOS</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">---</td>
-
+                                
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                    <%= totalArea.toLocaleString() %> km²
+                                     <%= totalArea.toLocaleString() %> km²
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                    <%= totalPoblacion.toLocaleString() %>
+                                   <%= totalPoblacion.toLocaleString() %>
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-mono">
                                     <%= promedioGini> 0 ? promedioGini + '% (Prom)' : 'N/A' %>
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap"></td>
+                                <td></td>
+                                                                <td ></td>
+
                             </tr>
 
 
                             <!-------------Fin codigo Agregar Totales-->
+
+                </tbody>
+                
 
             </table>
         </div>
