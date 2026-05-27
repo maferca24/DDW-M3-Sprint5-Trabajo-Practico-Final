@@ -1,10 +1,12 @@
 <!--Vista EJS para agregar un nuevo país de forma manual-->
 <div class="container mx-auto px-4 py-8 max-w-2xl">
-    
+
     <!-- Botón Volver -->
     <div class="mb-6">
-        <a href="/dashboard" class="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition duration-150">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <a href="/dashboard"
+            class="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition duration-150">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Volver al Dashboard
@@ -13,37 +15,39 @@
 
     <!-------->
     <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-        
+
         <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-5 text-white">
             <h1 class="text-xl font-bold">Agregar Nuevo País</h1>
             <p class="text-blue-100 text-xs mt-1">Registra un nuevo país de forma manual.</p>
         </div>
 
         <form id="addPaisForm" class="p-6 space-y-5">
-            
+
             <!-- Nombre Oficial -->
             <div>
                 <label for="nombreOficial" class="block text-sm font-medium text-gray-700 mb-1">Nombre Oficial:</label>
                 <input type="text" id="nombreOficial" name="nombreOficial" minlength="3" maxlength="90" required
-                       class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                       placeholder="Ej. República Argentina">
+                    class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    placeholder="Ej. República Argentina">
             </div>
 
             <!-- Capital -->
             <div>
-                <label for="capital" class="block text-sm font-medium text-gray-700 mb-1">Capital (separados por coma):</label>
+                <label for="capital" class="block text-sm font-medium text-gray-700 mb-1">Capital (separados por
+                    coma):</label>
                 <input type="text" id="capital" name="capital" minlength="3" maxlength="90" required
-                       class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                       placeholder="Ej. Ciudad Autónoma de Buenos Aires">
+                    class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    placeholder="Ej. Ciudad Autónoma de Buenos Aires">
             </div>
 
             <!-- Límites -->
             <div>
-                <label for="limites" class="block text-sm font-medium text-gray-700 mb-1">Límites / Fronteras (3 letras mayúsculas, separados por comas):</label>
-                <input type="text" id="limites" name="limites" 
-                       pattern="^[A-Z]{3}(,[A-Z]{3})*$" title="Tres letras mayúsculas separadas por coma (ej. CHI,BOL)"
-                       class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                       placeholder="Ej. CHI, BOL">
+                <label for="limites" class="block text-sm font-medium text-gray-700 mb-1">Límites / Fronteras (3 letras
+                    mayúsculas, separados por comas):</label>
+                <input type="text" id="limites" name="limites" pattern="^[A-Z]{3}(,[A-Z]{3})*$"
+                    title="Tres letras mayúsculas separadas por coma (ej. CHI,BOL)"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    placeholder="Ej. CHI, BOL">
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -51,44 +55,53 @@
                 <div>
                     <label for="area" class="block text-sm font-medium text-gray-700 mb-1">Área (km²):</label>
                     <input type="number" id="area" name="area" required min="1" step="any"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                           placeholder="2780400">
+                        class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                        placeholder="2780400">
                 </div>
                 <!-- Población -->
                 <div>
                     <label_for="poblacion" class="block text-sm font-medium text-gray-700 mb-1">Población:</label>
-                    <input type="number" id="poblacion" name="poblacion" required min="1" step="1"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                           placeholder="46000000">
+                        <input type="number" id="poblacion" name="poblacion" required min="1" step="1"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                            placeholder="46000000">
+                </div>
+                <div>
+                    <label for="gini" class="block text-sm font-medium text-gray-700 mb-1">Índice de Gini:</label>
+                    <input type="number" id="gini" name="gini" min="0" max="100" step="any"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                        placeholder="Ej. 42.9">
                 </div>
             </div>
 
             <!-- Zonas Horarias -->
-           <div>
-                <label for="zonasHorarias" class="block text-sm font-medium text-gray-700 mb-1">Zonas Horarias (separadas por comas):</label>
+            <div>
+                <label for="zonasHorarias" class="block text-sm font-medium text-gray-700 mb-1">Zonas Horarias
+                    (separadas por comas):</label>
                 <input type="text" id="zonasHorarias" name="zonasHorarias" required
-                       class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                       placeholder="Ej. UTC-03:00">
+                    class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    placeholder="Ej. UTC-03:00">
             </div>
 
             <!-- URL de la Bandera -->
             <div>
-                <label for="bandera" class="block text-sm font-medium text-gray-700 mb-1">URL de la Bandera (Link SVG o PNG):</label>
+                <label for="bandera" class="block text-sm font-medium text-gray-700 mb-1">URL de la Bandera (Link SVG o
+                    PNG):</label>
                 <input type="url" id="bandera" name="bandera" required
-                       class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                       placeholder="https://flagcdn.com/ar.svg">
+                    class="w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    placeholder="https://flagcdn.com/ar.svg">
             </div>
 
             <!-- Creador -->
             <div>
                 <label for="creador" class="block text-sm font-medium text-gray-400 mb-1">Creador:</label>
                 <input type="text" id="creador" name="creador" value="Fernanda" readonly
-                       class="w-full px-3 py-2 border border-gray-200 bg-gray-50 text-gray-400 rounded-xl text-sm outline-none cursor-not-allowed">
+                    class="w-full px-3 py-2 border border-gray-200 bg-gray-50 text-gray-400 rounded-xl text-sm outline-none cursor-not-allowed">
             </div>
 
             <!-- Botón de Envío -->
             <div class="pt-4 flex justify-end">
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-6 rounded-xl text-sm shadow-sm transition duration-150">
+                <button type="submit"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-6 rounded-xl text-sm shadow-sm transition duration-150">
                     Agregar País
                 </button>
             </div>
@@ -104,6 +117,7 @@
         const nombre = document.getElementById('nombreOficial').value.trim();
         const area = parseFloat(document.getElementById('area').value);
         const poblacion = parseInt(document.getElementById('poblacion').value);
+        const gini = parseFloat(document.getElementById('gini').value) || 0; // Si no se ingresa, dejamos 0
         const creador = document.getElementById('creador').value.trim() || 'Fernanda';
         const bandera = document.getElementById('bandera').value.trim();
 
@@ -153,7 +167,14 @@
         if (isNaN(poblacion) || poblacion <= 0 || !Number.isInteger(poblacion)) {
             errors.push("La población debe ser un número entero positivo.");
         }
-        
+        // Validación de Índice de Gini (si se ingresa, debe estar entre 0 y 100)
+        //El indice gini mide la desigualdad en la distribución del ingreso, 
+        // donde 0 representa igualdad perfecta y 100 representa desigualdad total. 
+        // Por eso, si se ingresa un valor para el índice de Gini, debe estar dentro de este rango para ser válido.
+        if (gini < 0 || gini > 100) {
+            errors.push("El índice de Gini debe estar entre 0 y 100.");
+        }
+
         // Validación de Bandera
         if (!bandera) {
             errors.push("La URL de la bandera es obligatoria.");
@@ -162,7 +183,7 @@
         // Si el JavaScript del Frontend atrapa errores, detenemos el flujo aquí mismo
         if (errors.length > 0) {
             alert("Por favor corrige los siguientes errores:\n\n" + errors.join("\n"));
-            return; 
+            return;
         }
 
         // Si pasamos las validaciones del Frontend, hacemos la petición al Backend
@@ -178,6 +199,7 @@
                     borders: limites,      // En el Backend se llama "borders"
                     area,
                     population: poblacion, // En el Backend se llama "population"
+                    gini,                 // En el Backend se llama "gini"
                     timezones: zonasHorarias,// En el Backend se llama "timezones"
                     bandera,
                     creador,
@@ -191,7 +213,7 @@
             } else {
                 const errorData = await response.json();
                 console.error('Error del servidor:', errorData);
-                
+
                 // Si el Backend envía un array de errores, los mostramos al usuario
                 if (errorData.errors && Array.isArray(errorData.errors)) {
                     const mensajesBackend = errorData.errors.map(err => `• ${err.msg}`).join("\n");

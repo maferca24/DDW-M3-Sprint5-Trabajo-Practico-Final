@@ -28,7 +28,8 @@ const paisSchema = new mongoose.Schema({
     },
     gini: {
         type: Number,
-        default: null
+        required: false,
+        //default: null
     },
     timezones: {
         type: [String],

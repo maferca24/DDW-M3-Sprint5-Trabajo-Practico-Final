@@ -35,6 +35,7 @@ export const obtenerYProcesarPaises = async () => {
                     area: pais.area || 0,
                     population: pais.population || 0,
                     timezones: pais.timezones || [],
+                    gini: pais.gini ? Object.values(pais.gini)[0] : 0,// La API devuelve un objeto con el año como clave y el valor del índice Gini, si no tiene, dejamos 0
                     bandera: pais.flags.svg, // Usamos la imagen vectorial
                     creador: "Fernanda", // Valor por defecto para identificar los países creados por mí
                     tipoDocumento: "pais" // Tu discriminador seguro

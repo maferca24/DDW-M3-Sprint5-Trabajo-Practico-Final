@@ -57,6 +57,8 @@ export const validatePais = [
     body("population")
         .isInt({ gt: 0 }).withMessage("La población debe ser un entero positivo"),
 
+    body("gini").optional().isFloat({ min: 0, max: 100 }).withMessage("El índice de Gini debe ser un número entre 0 y 100"),
+
     // Timezones: obligatorio como array, elementos strings no vacíos
     body("timezones")
         .isArray().withMessage("Los husos horarios deben ser un array")

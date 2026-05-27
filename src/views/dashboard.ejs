@@ -35,6 +35,7 @@ AVANZADO:gini, suma de population, suma de area, promedio de gini.-->
                         <th scope="col" class="px-6 py-4">Límites / Fronteras</th>
                         <th scope="col" class="px-6 py-4">Área</th>
                         <th scope="col" class="px-6 py-4">Población</th>
+                        <th scope="col" class="px-6 py-4">Gini</th>
                         <th scope="col" class="px-6 py-4">Zonas Horarias</th>
                         <!--<th scope="col" class="px-6 py-4">Creador</th>-->
                         <th scope="col" class="px-6 py-4 text-center">Acciones</th>
@@ -68,6 +69,9 @@ AVANZADO:gini, suma de population, suma de area, promedio de gini.-->
                                 
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <%= pais.population ? pais.population.toLocaleString() : '0' %>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <%= pais.gini !== undefined ? pais.gini : 'N/A' %> <!--Si gini es 0, lo mostramos como 0, si no existe o es undefined, mostramos N/A-->   
                                 </td>
                                 
                                 <td class="px-6 py-4 text-xs text-gray-500 max-w-xs truncate">
