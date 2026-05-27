@@ -8,7 +8,7 @@ export function renderizarPais(pais) {
         Limites: pais.borders,
         Área: pais.area,
         Población: pais.poblacion,
-        // "Zona Horaria": pais.timezones,
+        "Zona Horaria": pais.timezones,
         Bandera: pais.bandera,
         Creador: pais.creador
     };
