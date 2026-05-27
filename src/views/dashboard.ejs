@@ -116,68 +116,57 @@ AVANZADO:gini, suma de population, suma de area, promedio de gini.-->
                                         </td>
                                     </tr>
                                     <% } %>
-                                    <!------------Codigo para agregar Totales-->
-                <% <!--Inicializamos las variables acumuladoras antes del bucle-->
-                    let totalArea = 0;
-                    let totalPoblacion = 0;
-                    let sumaGini = 0;
-                    let paisesConGini = 0;
+                                        <!-----AGREGO TOTALES DE AREA, POBLACION Y GINI-->
+                                        <% <!--Inicializamos las variables acumuladoras antes del bucle-->
+                                            let totalArea = 0;
+                                            let totalPoblacion = 0;
+                                            let sumaGini = 0;
+                                            let paisesConGini = 0;
 
-                    paises.forEach(pais => {
-                    <!--Acumulamos los valores de cada país en este ciclo-->
-                    totalArea += pais.area || 0;
-                    totalPoblacion += pais.population || 0;
+                                            paises.forEach(pais => {
+                                            <!--Acumulamos los valores de cada país en este ciclo-->
+                                            totalArea += pais.area || 0;
+                                            totalPoblacion += pais.population || 0;
 
-                    if (pais.gini && pais.gini > 0) {
-                    sumaGini += pais.gini;
-                    paisesConGini++; <!--Contamos cuántos países aportaron al Gini-->
-                    }
-                    %>
-                    <!-- <tr>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                    <%= pais.area.toLocaleString() %> km²
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                    <%= pais.population.toLocaleString() %>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 font-mono">
-                    <%= pais.gini && pais.gini > 0 ? pais.gini + '%' : 'N/A' %>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    </td>
-            </tr> -->
-                    <% }) %>
-                        <% <!--Calcular el promedio del Gini de forma segura para evitar división por cero-->
-                            let promedioGini = paisesConGini > 0 ? (sumaGini / paisesConGini).toFixed(1) : 0;
-                            %>
-                            <tr class="bg-gray-50 font-bold border-t-2 border-gray-300">
-                                <td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">TOTALES / PROMEDIOS</td>
-                                
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                     <%= totalArea.toLocaleString() %> km²
-                                </td>
+                                            if (pais.gini && pais.gini > 0) {
+                                            sumaGini += pais.gini;
+                                            paisesConGini++; <!--Contamos cuántos países aportaron al Gini-->
+                                            }
+                                            %>
 
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                   <%= totalPoblacion.toLocaleString() %>
-                                </td>
+                                            <% }) %>
+                                                <% <!--Calcular el promedio del Gini de forma segura para evitar
+                                                    división por cero-->
+                                                    let promedioGini = paisesConGini > 0 ? (sumaGini /
+                                                    paisesConGini).toFixed(1) : 0;
+                                                    %>
+                                                    <tr class="bg-gray-50 font-bold border-t-2 border-gray-300">
+                                                        <td colspan="4"
+                                                            class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 text-right">
+                                                            TOTALES / PROMEDIOS:
+                                                        </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-mono">
-                                    <%= promedioGini> 0 ? promedioGini + '% (Prom)' : 'N/A' %>
-                                </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                            <%= totalArea.toLocaleString() %> km²
+                                                        </td>
 
-                                <td></td>
-                                                                <td ></td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                            <%= totalPoblacion.toLocaleString() %>
+                                                        </td>
 
-                            </tr>
+                                                        <td
+                                                            class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-mono">
+                                                            <%= promedioGini> 0 ? promedioGini + '% (Prom)' : 'N/A' %>
+                                                        </td>
+
+                                                        <td colspan="2" class="px-6 py-4 whitespace-nowrap"></td>
+                                                    </tr>
 
 
-                            <!-------------Fin codigo Agregar Totales-->
+                                                    <!-------------Fin codigo Agregar Totales-->
 
                 </tbody>
-                
+
 
             </table>
         </div>
