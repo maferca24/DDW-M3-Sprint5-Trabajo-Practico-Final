@@ -10,6 +10,7 @@ const router = express.Router();
 import { getDashboardController, crearPaisController, actualizarPaisController, obtenerPaisPorIdController, eliminarPaisporIdController } from "../controllers/paisController.mjs"; 
 
 // Ruta para probar cargar la base de datos
+http://localhost:3000/api/sincronizar
 router.get('/sincronizar', async (req, res) => {
     try {
         const datosLimpios = await obtenerYProcesarPaises(); // Llama al servicio que obtiene y procesa los datos de la API externa

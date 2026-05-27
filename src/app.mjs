@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));// Como __dirname 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs"); // Configurar ejs como motor de plantillas
 
-// Configuración de Layouts
+// Configuración de Layouts con EJS 
 app.use(expressLayouts);
 app.set('layout', 'layout'); // Busca views/layout.ejs por defecto
 
@@ -42,34 +42,22 @@ app.get('/', (req, res) => {
         title: 'Gestión de Países' // Título dinámico para el head
     });
 });
-
+// Página de "Acerca de"
 app.get("/acerca-de", (req, res) => {
     res.render("about", { title: 'Acerca de' 
 
     });// Renderiza la vista about.ejs para mostrar la página de "Acerca de"
 });
-
 // Rutas de la API (Backend)
-app.use('/api', paisesRoutes);
+app.use('/api', paisesRoutes);// Configurar las rutas de la API para paises, que se encuentran en el archivo paisesRoutes.mjs
 
 // Rutas del Dashboard (Frontend/Vistas)
-app.use("/dashboard", paisesfront);
+app.use("/dashboard", paisesfront);// Configurar la ruta para el dashboard, que renderiza las vistas del frontend para paises
 
 // Manejo de errores 404 (Página no encontrada)
 app.use((req, res) => {
     res.status(404).render('404', { title: 'Página no encontrada' });
 });
-
-// // Levantar el servidor
-// app.listen(PORT, '0.0.0.0', () => {
-//     console.log(`Servidor levantado con éxito en el puerto ${PORT}`);
-// });
-
-// Rutas de la API (Backend)
-app.use('/api', paisesRoutes);// Configurar las rutas de la API para paises, que se encuentran en el archivo paisesRoutes.mjs
-
-// Rutas del Dashboard (Frontend/Vistas)
-app.use("/dashboard", paisesfront);// Configurar la ruta para el dashboard, que renderiza las vistas del frontend para paises   
 
 // Manejo de errores 404 (Página no encontrada)
 app.use((req, res) => {

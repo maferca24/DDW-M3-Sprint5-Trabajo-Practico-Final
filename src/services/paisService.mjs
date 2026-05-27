@@ -11,11 +11,17 @@ import paisRepository from '../repositories/paisRepository.mjs';// Importamos el
 export const obtenerYProcesarPaises = async () => {
     try {
         // Consumimos la API (filtrando ya por región: Americas)
-        const url = 'https://restcountries.com/v3.1/region/americas';
-        const { data } = await axios.get(url);
+        const url = 'https://restcountries.com/v3.1/region/americas';// La API devuelve un array 
+        // de objetos con la información de los países de América
+        const { data } = await axios.get(url);// Desestructuramos para obtener solo el array de países 
+        // que viene en la propiedad "data" de la respuesta de axios
+        
+        //Axios es una librería que sirve para hacer peticiones HTTP (en este caso  hace un get a la API de paises). 
+        //De todo lo que devuelve(estado de la petición, cabeceras, configuración, etc.), nos interesa solo la propiedad "data" 
+       // que es un array con la información de los países, por eso hacemos esa desestructuración.
 
         // Filtramos y Mapeamos en un solo paso para obtener solo los países que hablen español y con la estructura de nuestro modelo de país
-        const paisesFiltrados = data
+        const paisesFiltrados = data //
             .filter(pais => pais.languages && pais.languages.spa) // Solo hispanohablantes
             .map(pais => {
                 // Obtenemos el nombre oficial en español, si no existe, usamos el nombre oficial general
@@ -66,7 +72,7 @@ export async function obtenerPaisPorId(id) {
 export async function crearPais(pais) {
     //Agregamos control para validar los datos antes de pasarlos al repositorio
     if (!pais.nombreOficial || !pais.capital) {
-        throw new Error("El nombre oficial y la capital son obligatorios.");
+        throw new Error("El nombre oficial y la capital son obligatorios.");// Validamos que los campos obligatorios estén presentes
     }
     return await paisRepository.crear(pais);
 }
