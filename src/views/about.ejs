@@ -69,18 +69,21 @@
                     Pasos de Ejecución
                 </h2>
                 <div class="space-y-3">
-                    <p class="text-gray-600 text-sm">Para levantar el proyecto localmente, sigue esta secuencia de comandos:</p>
+                    <p class="text-gray-600 text-sm">Para levantar el proyecto localmente, sigue estos pasos:</p>
                     <div class="bg-gray-900 text-gray-300 p-4 rounded-xl font-mono text-xs space-y-2 shadow-inner">
-                        <p> -Instalar las dependencias del proyecto</p>
-                        <p> -Configurar conexión a la base de datos</p>
-                        <p> -Iniciar el servidor en modo desarrollo</p>
-                        <p> -Acceder a la aplicación en el navegador</p>
+                        <p> -Abrir en local la consola de comandos y clonar el repositorio </p><span class="text-amber-200"> git clone https://github.com/maferca24/DDW-M3-Sprint5-Trabajo-Practico-Final.git</span>
+                        <p> -Ingresar a visual studio code</p><span class="text-amber-200">code <project-folder></span>
+                        <p> -Instalar las dependencias del proyecto</p><span class="text-amber-200">npm install</span>
+                        <p> -Configurar conexión a la base de datos</p><span class="text-amber-200">modificar en config/dbConfig.mjs</span>
+                        <p> -Ingresar al directorio del proyecto</p><span class="text-amber-200">cd src/<project-folder></span>
+                        <p> -Iniciar el servidor</p><span class="text-amber-200">node app.mjs</span>
+                        <p> -Acceder a la aplicación en el navegador</p><span class="text-amber-200">localhost:3000</span>
                         <!---- Instrucción de inicialización--Luego modificar si creo botón para incializar sincronización automática al iniciar el servidor-->
-                        <p><span class="text-red-600">IMPORTANTE</span>- Instrucción de inicialización (SINCRONIZAR API):</p>
+                        <p><span class="text-red-400">IMPORTANTE</span>- Instrucción de inicialización (SINCRONIZAR API):</p>
                         <p>Para poblar la base de datos automáticamente con los países hispanohablantes</p>
-                        <p>filtrados por el servicio de Axios, ejecuta una petición POST mediante</p>
-                        <p>Postman o desde la consola a la siguiente URL de prueba:</p>
-                        <p><span class="text-amber-400">POST</span> http://localhost:3000/api/sincronizar</p>
+                        <p>filtrados por el servicio de Axios, ejecuta una petición GET mediante</p>
+                        <p>Postman o desde la consola a la siguiente URL:</p>
+                        <p><span class="text-amber-400">GET</span> http://localhost:3000/api/sincronizar</p>
                     </div>
                 </div>
             </section>

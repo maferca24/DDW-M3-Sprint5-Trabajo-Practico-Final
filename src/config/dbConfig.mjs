@@ -7,9 +7,9 @@ import mongoose from 'mongoose';
 
 export async function connectDB(){
     try {    
-        // Conexión a MongoDB Atlas usando la URI de conexión
-        await mongoose.connect('mongodb+srv://grupo-04:grupo-04@cluster0.blryo.mongodb.net/NodeMod3Cohorte5');
-        console.log('Conexión exitosa a MongoDB');
+        // Conexión a MongoDB Atlas usando la URI de conexión proporcionada por MongoDB Atlas. 
+        await mongoose.connect('mongodb+srv://grupo-04:grupo-04@cluster0.blryo.mongodb.net/NodeMod3Cohorte5'); 
+               console.log('Conexión exitosa a MongoDB');
         
     } catch (error) {
         console.error ('Error al conectar a MongoDB:', error);
