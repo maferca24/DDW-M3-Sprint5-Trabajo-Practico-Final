@@ -1,5 +1,5 @@
 Objetivo del Proyecto:
-Construir una aplicación web que consuma datos de una API externa (REST Countries) para mostrar información relevante sobre los países hispanohablantes del continente americano. La aplicación permite a los usuarios explorar, agregar, editar y eliminar países, integrando validaciones robustas tanto en el frontend como en el backend para garantizar la integridad de los datos. 
+Construir una aplicación web que consuma datos de una API externa (REST Countries) para mostrar información relevante sobre los países hispanohablantes del continente americano. La aplicación permite a los usuarios explorar, agregar, editar y eliminar países, integrando validaciones tanto en el frontend como en el backend para garantizar la integridad de los datos. 
 Tecnologías Utilizadas:
 -Backend & Base de Datos
     Node.js & Express: Entorno de ejecución y framework para la construcción de la API REST.
