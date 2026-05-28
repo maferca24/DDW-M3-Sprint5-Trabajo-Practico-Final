@@ -4,7 +4,7 @@
     <!-- Botón Volver -->
     <div class="mb-6">
         <a href="/dashboard" class="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition duration-150">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Volver al Dashboard
@@ -25,8 +25,7 @@
             <!-- Objetivos -->
             <section>
                 <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2 mb-2">
-                    <span class="p-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm"></span>
-                    Objetivo del Proyecto
+                   Objetivo del Proyecto
                 </h2>
                 <p class="text-gray-600 text-sm leading-relaxed">
                     Construir una aplicación web que consuma datos de una API externa (REST Countries) para mostrar información relevante sobre los países hispanohablantes del continente americano. 
@@ -38,7 +37,6 @@
             <!-- Tecnologías Usadas -->
             <section>
                 <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2 mb-3">
-                    <span class="p-1.5 bg-indigo-50 text-indigo-600 rounded-lg text-sm"></span>
                     Tecnologías Utilizadas
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -47,7 +45,7 @@
                         <ul class="text-xs text-gray-600 space-y-1.5 list-disc pl-4">
                             <li><strong>Node.js & Express:</strong> Entorno de ejecución y framework para la construcción de la API REST.</li>
                             <li><strong>MongoDB & Mongoose:</strong> Base de Datos NoSQL y modelado de esquemas para los documentos de países.</li>
-                            <li><strong>Express-Validator:</strong> Middleware encargado de la sanitización y validación estricta de datos en el servidor.</li>
+                            <li><strong>Express-Validator:</strong> Middleware encargado de la sanitización y validación de datos en el servidor.</li>
                         </ul>
                     </div>
                     <div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
@@ -65,7 +63,6 @@
             <!-- Pasos de Ejecución -->
             <section>
                 <h2 class="text-lg font-bold text-gray-500 flex items-center gap-2 mb-3">
-                    <span class="p-1.5 bg-emerald-50 text-emerald-600 rounded-lg text-sm"></span>
                     Pasos de Ejecución
                 </h2>
                 <div class="space-y-3">
@@ -79,7 +76,7 @@
                         <p> -Iniciar el servidor</p><span class="text-amber-200">node app.mjs</span>
                         <p> -Acceder a la aplicación en el navegador</p><span class="text-amber-200">localhost:3000</span>
                         <!---- Instrucción de inicialización--Luego modificar si creo botón para incializar sincronización automática al iniciar el servidor-->
-                        <p><span class="text-red-400">IMPORTANTE</span>- Instrucción de inicialización (SINCRONIZAR API):</p>
+                        <p><i class="fa-solid fa-exclamation" style="color: rgb(200, 36, 49);"></i><span class="text-red-400">IMPORTANTE</span>- Instrucción de inicialización (SINCRONIZAR API):</p>
                         <p>Para poblar la base de datos automáticamente con los países hispanohablantes</p>
                         <p>filtrados por el servicio de Axios, ejecuta una petición GET mediante</p>
                         <p>Postman o desde la consola a la siguiente URL:</p>
@@ -92,14 +89,13 @@
             <!-- Consideraciones Especiales -->
             <section>
                 <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2 mb-2">
-                    <span class="p-1.5 bg-amber-50 text-amber-600 rounded-lg text-sm"></span>
                     Consideraciones Especiales
                 </h2>
                 <blockquote class="bg-amber-50/50 border-l-4 border-amber-500 rounded-r-xl p-4 text-xs text-gray-700 space-y-2 leading-relaxed">
                     <p>
                         <strong>Doble Capa de Validación :</strong> La aplicación cuenta con validaciones en el Frontend (HTML5 y JavaScript) 
                         para guiar al usuario de manera ágil. Adicionalmente, cuenta con un middleware en el Backend desarrollado con <code>express-validator</code>, 
-                        impidiendo cualquier inyección de datos corruptos o peticiones maliciosas externas a la base de datos.
+                        impidiendo la inyección de datos corruptos o peticiones maliciosas externas a la base de datos.
                     </p>
                     
                 </blockquote>
