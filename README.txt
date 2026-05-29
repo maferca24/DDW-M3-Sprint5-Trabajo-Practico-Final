@@ -26,13 +26,28 @@ Tecnologías Utilizadas:
     
     IMPORTANTE- Instrucción de inicialización (SINCRONIZAR API):
     Para poblar la base de datos automáticamente con los países hispanohablantes
-    filtrados por el servicio de Axios, ejecuta una petición GET mediante
-    Postman o desde la consola a la siguiente URL:
-    GET http://localhost:3000/api/sincronizar
+    filtrados por el servicio de Axios, ejecuta una petición POST mediante
+    Postman:
+    POST http://localhost:3000/api/sincronizar
  
  - Consideraciones Especiales
-    Doble Capa de Validación : La aplicación cuenta con validaciones en el Frontend (HTML5 y JavaScript) para guiar al usuario de manera ágil. Adicionalmente, cuenta con un middleware en el Backend desarrollado con express-validator, impidiendo la inyección de datos corruptos o peticiones maliciosas externas a la base de datos.
+    Doble Capa de Validación : La aplicación cuenta con validaciones en el Frontend (HTML5 y JavaScript) para guiar al usuario de manera ágil. 
+    Adicionalmente, cuenta con un middleware en el Backend desarrollado con express-validator, impidiendo la inyección de datos corruptos o peticiones maliciosas externas a la base de datos.
+ 
+ - Consideraciones de Arquitectura 
 
- - Actualmente, la integración de la API externa se encuentra en paisService. 
-  Se podría pasar el consumo de Axios hacia paisRepository para cumplir con el principio de responsabilidad única, 
-  dejando al servicio únicamente la gestión de las reglas de negocio.  
+Con el objetivo de priorizar los tiempos de entrega del proyecto final, y para agilizar las pruebas de integración del flujo Axios-Mongoose
+se tomaron ciertas decisiones de diseño centralizadas, que se reconocen deberian modificarse de acuerdo al patrón MVC. 
+
+-Separar del Enrutador, la capa de controladores
+Estado Actual: La lógica de control del endpoint `/sincronizar` (que coordina el servicio de Axios y el guardado en la base de datos) 
+se encuentra definida directamente dentro del archivo de rutas (`paisesRoutes.mjs`).
+* Se deberia extraer esta lógica hacia un método llamado `sincronizarPaisesController` dentro de la capa de Controladores. 
+Con esto, el enrutador cumplirá con su única responsabilidad: definir los endpoints y delegar el flujo inmediatamente.
+
+-Separación de Responsabilidades en el Consumo de APIs (Principio de Responsabilidad Única)
+-Estado Actual: El servicio `obtenerYProcesarPaises` (alojado en `paisService.js`) realiza tanto la petición HTTP externa mediante `Axios` 
+como la aplicación de las reglas de negocio (filtrado de países hispanohablantes).
+* Se deberia trasladar (el consumo directo de la API externa con `Axios`) hacia el repositorio (`paisRepository.mjs`). 
+De este modo, la capa de Servicio se concentrará en la gestión y transformación de las reglas de negocio.
+

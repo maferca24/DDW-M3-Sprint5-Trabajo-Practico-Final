@@ -1,16 +1,16 @@
 import express from 'express'; // Importar el framework Express para crear el servidor web
 import path from 'path'; // Importar el módulo 'path' para manejar rutas de archivos y directorios
-import expressLayouts from 'express-ejs-layouts'; // Importar el middleware 'express-ejs-layouts' para usar layouts con EJS
+import expressLayouts from 'express-ejs-layouts'; // Importar el middleware 'express-ejs-layouts' para usar layouts con EJS que permite definir una estructura 
+// común para las vistas y evitar repetir código HTML en cada vista individual
 import { connectDB } from './config/dbConfig.mjs'; // Importar la función 'connectDB' para conectar a la base de datos MongoDB
 import paisesRoutes from './routes/paisesRoutes.mjs'; // Importar las rutas de la API para paises
-//import { paisesRoutes } from './routes/paisesRoutes.mjs'; // Importar las rutas de la API para paises
 import paisesfront from './routes/paisesFront.mjs'; // Importar las rutas del frontend para paises
 
 const app = express(); // Crear instancia de Express
 const PORT = process.env.PORT || 3000; // Definir el puerto para el servidor
 
 // Identificar la raíz actual de ejecución (src) para configurar correctamente las rutas de archivos estáticos y vistas
-const __dirname = path.resolve(); 
+const __dirname = path.resolve(); // Esto nos da la ruta absoluta del directorio actual de ejecución, que en este caso es 'src' debido a la estructura del proyecto.
 //console.log("-> Ruta base actual (__dirname):", __dirname); 
 
 //Configuración de archivos estáticos (CSS, JS, imágenes, etc.) 
@@ -27,10 +27,13 @@ app.set('layout', 'layout'); // Busca views/layout.ejs por defecto
 
 // Middlewares para procesar datos
 app.use(express.json()); // Para procesar JSON
-app.use(express.urlencoded({ extended: true })); // Para procesar formularios simples
+app.use(express.urlencoded({ extended: true })); // Para procesar formularios simples, extended: true permite procesar objetos anidados en formularios
+//recibe todo en el cuerpo de la solicitud y lo convierte en un objeto JavaScript accesible a través de req.body. 
+// Esto es útil para manejar datos enviados desde formularios HTML 
 
 // Conexión a MongoDB
-connectDB();
+connectDB();// Llamar a la función para conectar a la base de datos MongoDB. 
+// Esto es importante para que el servidor pueda interactuar con la base de datos y realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en los países.
 
 // ==========================================
 // DEFINICIÓN DE RUTAS
@@ -59,12 +62,8 @@ app.use((req, res) => {
     res.status(404).render('404', { title: 'Página no encontrada' });
 });
 
-// Manejo de errores 404 (Página no encontrada)
-app.use((req, res) => {
-    res.status(404).render('404', { title: 'Página no encontrada' });
-});
-
 //Importante: Para levantar el servidor en render es necesario configurar el puerto http al que render va escuchar
+// El puerto se obtiene de la variable de entorno PORT, si no está definida, se usará el puerto 3000 por defecto. 
 app.listen(PORT, '0.0.0.0', () => {//
     console.log(`Servidor levantado en el puerto ${PORT}`);
 });
