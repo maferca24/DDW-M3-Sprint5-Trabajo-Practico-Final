@@ -34,7 +34,7 @@ Tecnologías Utilizadas:
     Doble Capa de Validación : La aplicación cuenta con validaciones en el Frontend (HTML5 y JavaScript) para guiar al usuario de manera ágil. 
     Adicionalmente, cuenta con un middleware en el Backend desarrollado con express-validator, impidiendo la inyección de datos corruptos o peticiones maliciosas externas a la base de datos.
  
- - Consideraciones de Arquitectura 
+ - Consideraciones de Arquitectura- Mejoras 
 
 Con el objetivo de priorizar los tiempos de entrega del proyecto final, y para agilizar las pruebas de integración del flujo Axios-Mongoose
 se tomaron ciertas decisiones de diseño centralizadas, que se reconocen deberian modificarse de acuerdo al patrón MVC. 
@@ -51,4 +51,9 @@ la petición HTTP externa mediante `Axios` como la aplicación de las reglas de 
 (filtrado de países hispanohablantes).
 * Se deberia trasladar (el consumo directo de la API externa con `Axios`) hacia el repositorio (`paisRepository.mjs`). 
 De este modo, la capa de Servicio se concentrará en la gestión de las reglas de negocio.
+
+-Validación de duplicados en cargas manuales.
+- Estado Actual: El método crear ( que se encuentra en 'paisRepository') no verifica si el pais ya fue registrado.
+* Se podría agregar una consulta, justo antes de agregar, para que el repositorio decida si graba o rechaza.
+
 
