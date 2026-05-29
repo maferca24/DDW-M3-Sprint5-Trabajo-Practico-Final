@@ -1,9 +1,8 @@
-// El servicio es el encargado de contener la lógica de negocio de la aplicación, es decir, las operaciones que se realizan sobre los datos.
+// El servicio es el encargado de contener la lógica de negocio de la aplicación, 
+// es decir, las operaciones que se realizan sobre los datos.
 
 import axios from 'axios';// Importamos axios para hacer la petición HTTP -para consumir la API externa y obtener los datos de los países
-import paisRepository from '../repositories/paisRepository.mjs';// Importamos el repositorio 
-
-
+import paisRepository from '../repositories/paisRepository.mjs';// Importamos el repositorio
 // de países para interactuar con la base de datos
 
 //Servicio para obtener y procesar los datos de la API externa, filtrando solo los países de América que hablen español 
@@ -38,7 +37,8 @@ export const obtenerYProcesarPaises = async () => {
                     gini: pais.gini ? Object.values(pais.gini)[0] : 0,// La API devuelve un objeto con el año como clave y el valor del índice Gini, si no tiene, dejamos 0
                     bandera: pais.flags.svg, // Usamos la imagen vectorial
                     creador: "Fernanda", // Valor por defecto para identificar los países creados por mí
-                    tipoDocumento: "pais" // Tu discriminador seguro
+                    tipoDocumento: "pais" // Valor por defecto para identificar el tipo de documento en la base de datos
+                    
                 };
             });
 
@@ -49,7 +49,7 @@ export const obtenerYProcesarPaises = async () => {
 
         // ==========================================
         //const unSoloPais = paisesFiltrados.slice(0, 1); 
-        console.log("-> País de prueba preparado:", unSoloPais[0].nombreOficial);
+        //console.log("-> País de prueba preparado:", unSoloPais[0].nombreOficial);
         
         //return unSoloPais; // Devolvemos un array con un único país
 
@@ -73,7 +73,8 @@ export async function obtenerPaisPorId(id) {
 export async function crearPais(pais) {
     //Agregamos control para validar los datos antes de pasarlos al repositorio
     if (!pais.nombreOficial || !pais.capital) {
-        throw new Error("El nombre oficial y la capital son obligatorios.");// Validamos que los campos obligatorios estén presentes
+        throw new Error("El nombre oficial y la capital son obligatorios.");
+        // Validamos que los campos obligatorios estén presentes
     }
     return await paisRepository.crear(pais);
 }

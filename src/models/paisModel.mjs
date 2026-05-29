@@ -55,7 +55,8 @@ const paisSchema = new mongoose.Schema({
     timestamps: true, 
     versionKey: false 
 });
-
+// El nombre del modelo es 'Pais' y se basa en el esquema definido. 
+// La colección en MongoDB se llamará "Grupo-04" porque es una colección compartida.
 const Pais = mongoose.model('Pais', paisSchema, 'Grupo-04'); // El tercer parámetro es el nombre de la colección en MongoDB. 
 // Usamos "Grupo-04" porque es una colección compartida.
 export default Pais;

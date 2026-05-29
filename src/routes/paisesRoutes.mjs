@@ -9,8 +9,21 @@ const router = express.Router();
 
 import { getDashboardController, crearPaisController, actualizarPaisController, obtenerPaisPorIdController, eliminarPaisporIdController } from "../controllers/paisController.mjs"; 
 
-// Ruta para probar cargar la base de datos
-// Cambiado a POST por semántica REST (Modifica la base de datos)
+// Ruta para agregar un nuevo país (desde el formulario del frontend)
+router.post('/paises', validatePais, crearPaisController);
+
+// Ruta para editar un pais existente (desde el formulario del frontend)
+router.put('/paises/id/:id', validatePais, actualizarPaisController);
+
+//Ruta para obtener un país por ID (para mostrar los datos en el formulario de edición)
+// http://localhost:3000/api/paises/69c6fd59d90e243b1c0fad1b
+router.get('/paises/:id', obtenerPaisPorIdController);
+
+//ruta para eliminar un país por ID (desde el botón de eliminar en el frontend)
+router.delete('/paises/id/:id', eliminarPaisporIdController);
+
+// Ruta para probar cargar la base de datos con los datos de la API externa, 
+// usando el servicio que obtiene y procesa los datos.
 router.post('/sincronizar', async (req, res) => {
     try {
         //Obtenemos los datos procesados desde el servicio (Axios)
@@ -19,7 +32,7 @@ router.post('/sincronizar', async (req, res) => {
         // Guardamos en la base de datos mediante tu repositorio
         await paisRepository.guardarMuchos(datosLimpios);    
         
-        // 3. Respondemos con un objeto JSON estructurado y estado 201 (Created) o 200 (OK)
+        // Respondemos con un objeto JSON estructurado y estado 201 (Created) o 200 (OK)
         res.status(200).json({
             success: true,
             message: "¡Base de datos de países actualizada con éxito!",
@@ -34,8 +47,9 @@ router.post('/sincronizar', async (req, res) => {
         });
     }
 });
-http://localhost:3000/api/sincronizar
-//Usar esta ruta solo para cargar la base de datos por primera vez, o para actualizarla con los datos de la API externa cuando sea necesario.
+//http://localhost:3000/api/sincronizar
+//Usar esta ruta solo para cargar la base de datos por primera vez, 
+// o para actualizarla con los datos de la API externa cuando sea necesario.
 //Use GET para que sea facil de mostrar por navegador
 //router.get('/sincronizar', async (req, res) => {
 //     try {
@@ -47,16 +61,6 @@ http://localhost:3000/api/sincronizar
 //     }
 // });
 
-// Ruta para agregar un nuevo país (desde el formulario del frontend)
-router.post('/paises', validatePais, crearPaisController);
 
-// Ruta para editar un pais existente (desde el formulario del frontend)
-router.put('/paises/id/:id', validatePais, actualizarPaisController);
 
-//Ruta para obtener un país por ID (para mostrar los datos en el formulario de edición)
-// http://localhost:3000/api/paises/69c6fd59d90e243b1c0fad1b
-router.get('/paises/:id', obtenerPaisPorIdController);
-
-//ruta para eliminar un país por ID (desde el botón de eliminar en el frontend)
-router.delete('/paises/id/:id', eliminarPaisporIdController);
 export default router;

@@ -5,7 +5,8 @@ import IRepository from './IRepository.mjs' // Importamos la interfaz para asegu
 
 
 class PaisRepository extends IRepository {
-    // Esta función recibe el array que generó el Servicio que toma los datos de la API externa y lo guarda en la base de datos. 
+    // Esta función recibe el array que generó el Servicio que toma los datos de la API externa 
+    // y lo guarda en la base de datos. 
     // Si el país ya existe (mismo nombre oficial y creador), lo actualiza; si no, lo crea (upsert).
     async guardarMuchos(paises) {
         try {
@@ -14,20 +15,22 @@ class PaisRepository extends IRepository {
                 // Si existe, actualiza; si no, lo crea (upsert)
                 return Pais.findOneAndUpdate(
                     { nombreOficial: pais.nombreOficial, creador: "Fernanda", tipoDocumento: "pais" },
-                    { ...pais, tipoDocumento: "pais" }, // Nos aseguramos de que viaje el campo tipoDocumento para que se guarde correctamente, 
-                    // ya que es importante para filtrar los países en el futuro
+                    { ...pais, tipoDocumento: "pais" }, // Nos aseguramos de que viaje el campo tipoDocumento 
+                    // para que se guarde correctamente, 
+                    // ya que es importante para filtrar los países 
                     { upsert: true, returnDocument: 'after', runValidators: true }
                 );
             });
 
-            return await Promise.all(promesas);// Esperamos a que todas las operaciones de guardado/actualización se completen
+            return await Promise.all(promesas);// Esperamos a que todas las operaciones de guardado/actualización 
+            // se completen
         } catch (error) {
             console.error("Error al guardar en BD:", error);
             throw error;
         }
     }
 
-    // Busca todos los países creados por mi. "Fernanda" para mostrarlos en el Dashboard
+    // Busca todos los países creados por el usuario "Fernanda" para mostrarlos en el Dashboard
     async obtenerTodos() {
         // return await Pais.find({ creador: "Fernanda" });
         // Agregamos el filtro por creador y tipoDocumento para asegurarnos de que solo traemos documentos que son países, 

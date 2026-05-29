@@ -46,8 +46,9 @@ se encuentra definida directamente dentro del archivo de rutas (`paisesRoutes.mj
 Con esto, el enrutador cumplirá con su única responsabilidad: definir los endpoints y delegar el flujo inmediatamente.
 
 -Separación de Responsabilidades en el Consumo de APIs (Principio de Responsabilidad Única)
--Estado Actual: El servicio `obtenerYProcesarPaises` (alojado en `paisService.js`) realiza tanto la petición HTTP externa mediante `Axios` 
-como la aplicación de las reglas de negocio (filtrado de países hispanohablantes).
+-Estado Actual: El servicio `obtenerYProcesarPaises` (alojado en `paisService.mjs`) realiza tanto 
+la petición HTTP externa mediante `Axios` como la aplicación de las reglas de negocio 
+(filtrado de países hispanohablantes).
 * Se deberia trasladar (el consumo directo de la API externa con `Axios`) hacia el repositorio (`paisRepository.mjs`). 
-De este modo, la capa de Servicio se concentrará en la gestión y transformación de las reglas de negocio.
+De este modo, la capa de Servicio se concentrará en la gestión de las reglas de negocio.
 
